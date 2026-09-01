@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certificate of Appreciation - Metrology Virtual Lab</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800;1,600&display=swap"
+    rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 1056px;
+      height: 747px;
+      margin: 0 auto;
+      background-color: #0b132b;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* Certificate Outer Frame */
+    .certificate-container {
+      position: relative;
+      width: 1056px;
+      height: 747px;
+      background: radial-gradient(circle at 50% 50%, #ffffff 0%, #fcfaf4 65%, #f5eedb 100%);
+      overflow: hidden;
+    }
+
+    /* Dual Golden Border Frame */
+    .certificate-container::before {
+      content: "";
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      border: 3px solid #b8860b;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .certificate-container::after {
+      content: "";
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      right: 25px;
+      bottom: 25px;
+      border: 1px solid #d4af37;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Decorative Corner Accents */
+    .corner-decor {
+      position: absolute;
+      width: 45px;
+      height: 45px;
+      border: 3px solid #0f2c59;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .top-left {
+      top: 22px;
+      left: 22px;
+      border-right: none;
+      border-bottom: none;
+    }
+
+    .top-right {
+      top: 22px;
+      right: 22px;
+      border-left: none;
+      border-bottom: none;
+    }
+
+    .bottom-left {
+      bottom: 22px;
+      left: 22px;
+      border-right: none;
+      border-top: none;
+    }
+
+    .bottom-right {
+      bottom: 22px;
+      right: 22px;
+      border-left: none;
+      border-top: none;
+    }
+
+    /* 1. Header Bar: Equal 50px Top and Side Margins */
+    .header-bar {
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      width: 956px;
+      height: 115px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 5;
+    }
+
+    .logo-img {
+      width: 112px;
+      height: 112px;
+      object-fit: contain;
+      filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.12));
+    }
+
+    .institution-info {
+      flex: 1;
+      text-align: center;
+      padding: 0 15px;
+    }
+
+    .univ-title {
+      font-family: 'Cinzel', serif;
+      font-size: 21px;
+      font-weight: 800;
+      color: #0f2c59;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .institute-title {
+      font-family: 'Cinzel', serif;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: #0f2c59;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 4px;
+      line-height: 1.2;
+    }
+
+    .dept-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #b8860b;
+      letter-spacing: 2px;
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+
+    /* Content Area: Width = 836px, Centered (Left 110px) */
+    .cert-body {
+      position: absolute;
+      left: 110px;
+      width: 836px;
+      height: 100%;
+      z-index: 5;
+    }
+
+    /* 2. Certificate Title */
+    .title-section {
+      position: absolute;
+      top: 205px;
+      width: 836px;
+      text-align: center;
+    }
+
+    .cert-heading {
+      font-family: 'Cinzel', serif;
+      font-size: 38px;
+      font-weight: 900;
+      color: #0f2c59;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .cert-subheading {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #64748b;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    /* 3. Recipient Name */
+    .recipient-section {
+      position: absolute;
+      top: 300px;
+      width: 836px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .student-name {
+      font-family: 'Cormorant Garamond', 'Cinzel', serif;
+      font-size: 54px;
+      font-weight: 700;
+      color: #b8860b;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      line-height: 1;
+      display: inline-block;
+    }
+
+    /* 4. Prose & Dedicated Experiment Section */
+    .prose-section {
+      position: absolute;
+      top: 405px;
+      width: 836px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .prose-intro {
+      font-size: 17px;
+      line-height: 1.7;
+      color: #334155;
+      font-weight: 500;
+      max-width: 830px;
+    }
+
+    .experiment-highlight-box {
+      margin-top: 12px;
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: #b8860b;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      line-height: 1.35;
+    }
+
+    .highlight-bold {
+      font-weight: 800;
+      color: #0f2c59;
+    }
+
+    /* 5. Footer Signatures */
+    .footer-bar {
+      position: absolute;
+      top: 618px;
+      width: 836px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .signature-box {
+      text-align: center;
+      width: 240px;
+    }
+
+    .sig-line {
+      width: 190px;
+      height: 2px;
+      background: #d4af37;
+      margin: 0 auto 8px;
+    }
+
+    .sig-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #0f2c59;
+      white-space: nowrap;
+    }
+
+    .sig-sub {
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-top: 3px;
+    }
+
+    @media print {
+      body {
+        background: none;
+      }
+
+      .certificate-container {
+        border: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="certificate-container">
+    <div class="corner-decor top-left"></div>
+    <div class="corner-decor top-right"></div>
+    <div class="corner-decor bottom-left"></div>
+    <div class="corner-decor bottom-right"></div>
+
+    <header class="header-bar">
+      <img src="./anna_logo.png" alt="Anna University Logo" class="logo-img" />
+
+      <div class="institution-info">
+        <div class="univ-title">ANNA UNIVERSITY</div>
+        <div class="institute-title">MADRAS INSTITUTE OF TECHNOLOGY</div>
+        <div class="dept-title">DEPARTMENT OF PRODUCTION TECHNOLOGY</div>
+      </div>
+
+      <img src="./mit_logo.png" alt="MIT Logo" class="logo-img" />
+    </header>
+
+    <div class="cert-body">
+      <div class="title-section">
+        <div class="cert-heading">CERTIFICATE OF APPRECIATION</div>
+        <div class="cert-subheading">THIS CERTIFICATE IS PROUDLY PRESENTED TO</div>
+      </div>
+
+      <div class="recipient-section">
+        <div class="student-name">{Name}</div>
+      </div>
+
+      <div class="prose-section">
+        <p class="prose-intro">
+          This certificate is awarded in recognition of the outstanding technical contributions of
+          <span class="highlight-bold">{Name}</span> (Roll No: <span class="highlight-bold">{Roll_Number}</span>),
+          working with team <span class="highlight-bold">{Team_ID}</span>, towards the development and virtualization of
+          Measurements &amp; Metrology Laboratory experiment:
+        </p>
+
+        <div class="experiment-highlight-box">
+          {Experiment_Name}
+        </div>
+      </div>
+
+      <footer class="footer-bar">
+        <div class="signature-box">
+          <div class="sig-line"></div>
+          <div class="sig-title">Lab Coordinator</div>
+          <div class="sig-sub">Virtual Laboratory Project</div>
+        </div>
+
+        <div class="signature-box">
+          <div class="sig-line"></div>
+          <div class="sig-title">Institution Seal</div>
+          <div class="sig-sub">[ Affix Seal Here ]</div>
+        </div>
+
+        <div class="signature-box">
+          <div class="sig-line"></div>
+          <div class="sig-title">Head of Department</div>
+          <div class="sig-sub">Department of Production Technology</div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

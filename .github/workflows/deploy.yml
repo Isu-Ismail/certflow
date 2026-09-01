@@ -1,0 +1,26 @@
+name: Deploy Dist to Deploy Branch
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  deploy:
+    name: Copy pre-built dist to deploy branch
+    if: contains(github.event.head_commit.message, 'build') || contains(github.event.head_commit.message, 'Build')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Publish dist folder to deploy branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: deploy
+          force_orphan: true
