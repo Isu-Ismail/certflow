@@ -128,7 +128,13 @@ export function redo() {
 
 /** Save to the browser right now (the autosave already does this after every change; this is the explicit button). */
 export async function saveNow() {
-  if (await ws.flush(true)) toast('Saved in this browser', 'success');
+  if (!(await ws.flush(true))) return;
+  if (ws.handle && ws.folderState === 'linked') {
+    const ok = await ws.syncFolder();
+    toast(ok ? `Saved in this browser and in the folder “${ws.handle.name}”` : 'Saved in this browser, but the folder could not be written', ok ? 'success' : 'error');
+  } else {
+    toast('Saved in this browser only. To keep a copy on your computer, open the workspace menu and choose a folder or .zip.', 'success');
+  }
 }
 
 /** Links the workspace to a folder (asks for one) and writes everything into it; from then on edits are saved there. */

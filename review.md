@@ -1,4 +1,4 @@
-# CertFlow review (branch `redesign`)
+# CertFlow review (branch `redesign`) — all P0-P2 items and UX items U1, U7 and #12 fixed since; see .knowledge/session_handoff.md
 
 Reviewer: grumpy old manager. Verdict: **NOT approved.** The feature set is wide, but a production-grade product is more than a wide feature set. Read the table, fix the P0 items first, then come back.
 

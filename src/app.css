@@ -19,10 +19,10 @@
   --color-step-soft: var(--soft-c);
 }
 
-:root { color-scheme: light; --c: #5b7cff; --on: #ffffff; --soft-c: #e4e9ff; }
-body[data-step='data']   { --c: #5b7cff; --on: #ffffff; --soft-c: #e4e9ff; }
+:root { color-scheme: light; --c: #4563ee; --on: #ffffff; --soft-c: #e4e9ff; }
+body[data-step='data']   { --c: #4563ee; --on: #ffffff; --soft-c: #e4e9ff; }
 body[data-step='design'] { --c: #ff7a59; --on: #121212; --soft-c: #ffe6de; }
-body[data-step='flow']   { --c: #9a78ff; --on: #ffffff; --soft-c: #ece6ff; }
+body[data-step='flow']   { --c: #7a55ee; --on: #ffffff; --soft-c: #ece6ff; }
 body[data-step='generate'] { --c: #2fc99a; --on: #121212; --soft-c: #d8f6ec; }
 
 /* Scrolls normally, but the scrollbar is not drawn. */
@@ -40,3 +40,7 @@ body[data-step='generate'] { --c: #2fc99a; --on: #121212; --soft-c: #d8f6ec; }
   /* text fields: no default blue ring, a hard step-colour shadow instead */
   input:focus-visible, select:focus-visible { outline: none; box-shadow: 3px 3px 0 var(--c); }
 }
+
+/* appears only after a short delay: a quick load never flashes it */
+@keyframes cf-late { from { opacity: 0; } to { opacity: 1; } }
+.cf-late { animation: cf-late 0.2s 0.3s both; }

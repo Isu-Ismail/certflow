@@ -14,7 +14,8 @@
 <header class="flex flex-wrap items-center gap-1.5 px-2 py-2 sm:gap-3 sm:px-3 md:flex-nowrap">
   <div class="flex items-center gap-2 text-lg font-bold tracking-tight">
     <!-- the CertFlow mark without the dark tile (public/logo-mark.svg, derived from favicon.svg) -->
-    <img src="{import.meta.env.BASE_URL}logo-mark.svg" alt="CertFlow" class="size-10" />
+    <img src="{import.meta.env.BASE_URL}logo-mark.svg" alt="" class="size-10" />
+    <h1 class="sr-only">CertFlow — certificate generator</h1>
     <!-- Space Grotesk's heaviest weight is 700, so a thin text-stroke makes it look bolder still -->
     <span class="hidden text-[26px] leading-none font-bold tracking-tight [-webkit-text-stroke:0.8px_currentColor] lg:inline">CertFlow</span>
   </div>

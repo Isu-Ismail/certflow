@@ -52,12 +52,19 @@
 
 <svelte:window onkeydown={onKeydown} />
 
+<a href="#main" class="sr-only rounded-md border-2 border-ink bg-white px-3 py-2 font-semibold focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50" onclick={(e) => { e.preventDefault(); document.getElementById('main')?.focus(); }}>Skip to content</a>
+
 <div class="flex h-dvh flex-col">
   <Header />
 
-  <main class="mx-2 mb-2 flex min-h-0 flex-1 flex-col overflow-auto rounded-xl border-2 border-ink bg-white shadow-hard-lg sm:mx-3 sm:mb-3">
+  <main id="main" tabindex="-1" class="mx-2 mb-2 flex min-h-0 flex-1 flex-col overflow-auto rounded-xl border-2 border-ink bg-white shadow-hard-lg outline-none sm:mx-3 sm:mb-3">
     {#if !ws.ready}
-      <!-- waiting for the autosave to load -->
+      <!-- waiting for the autosave to load (shown only if it takes more than a moment, so a fast load does not flash) -->
+      <div class="cf-late grid flex-1 place-items-center" role="status">
+        <div class="flex items-center gap-3 text-sm font-semibold">
+          <span class="size-5 animate-spin rounded-full border-2 border-ink border-t-transparent motion-reduce:animate-none"></span>Opening your workspace…
+        </div>
+      </div>
     {:else if ws.step === 'data'}
       <DataStep />
     {:else if ws.step === 'design'}

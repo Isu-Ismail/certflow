@@ -230,7 +230,7 @@
         >
           <!-- Checkbox / select circle -->
           <button
-            class="grid size-4 shrink-0 place-items-center rounded border border-ink transition-opacity {isSel ? 'bg-ink text-white opacity-100' : design.selectedFiles.length > 0 ? 'bg-white opacity-70 hover:opacity-100' : 'bg-white opacity-0 group-hover:opacity-100'}"
+            class="grid size-4 shrink-0 place-items-center rounded border border-ink transition-opacity {isSel ? 'bg-ink text-white opacity-100' : design.selectedFiles.length > 0 ? 'bg-white opacity-70 hover:opacity-100' : 'bg-white opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 pointer-coarse:opacity-100'}"
             aria-label="{isSel ? 'Deselect' : 'Select'} {f.name}"
             title="{isSel ? 'Click to deselect' : 'Click to select'}"
             onclick={(e) => { e.stopPropagation(); toggleSelect(f.name); }}

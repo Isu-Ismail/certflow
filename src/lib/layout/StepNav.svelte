@@ -4,9 +4,9 @@
 
   // Each step owns one colour (the page accent follows the active step, see app.css).
   const steps: { id: Step; label: string; bg: string; fg: string }[] = [
-    { id: 'data', label: 'Data', bg: '#5b7cff', fg: '#ffffff' },
+    { id: 'data', label: 'Data', bg: '#4563ee', fg: '#ffffff' },
     { id: 'design', label: 'Design', bg: '#ff7a59', fg: '#121212' },
-    { id: 'flow', label: 'Flow', bg: '#9a78ff', fg: '#ffffff' },
+    { id: 'flow', label: 'Flow', bg: '#7a55ee', fg: '#ffffff' },
     { id: 'generate', label: 'Generate', bg: '#2fc99a', fg: '#121212' },
   ];
 
@@ -29,7 +29,7 @@
         style="background:{active ? '#121212' : s.bg};color:{active ? '#fff' : s.fg}">{i + 1}</span>
       <span class="text-sm">{s.label}</span>
       {#if count(s.id)}
-        <span class="hidden font-mono text-[11px] opacity-75 lg:inline">{count(s.id)}</span>
+        <span class="hidden font-mono text-[11px] lg:inline">{count(s.id)}</span>
       {/if}
     </button>
   {/each}

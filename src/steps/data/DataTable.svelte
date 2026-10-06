@@ -200,7 +200,7 @@
         <tr class="text-left text-[13px]">
           <th class="{th} w-12 text-right">#</th>
           {#each sheet.columns as c (c)}<th class={th}>{#if c === idCol}<KeyRound class="mr-1 inline size-3.5 align-[-2px]" aria-label="Identity column" />{/if}{c}{#if readonly}<span class="block text-[10px] font-normal text-mute">{fileOf(c)}</span>{/if}</th>{/each}
-          {#if !readonly}<th class="{th} w-10"></th>{/if}
+          {#if !readonly}<th class="{th} w-10"><span class="sr-only">Row actions</span></th>{/if}
         </tr>
       </thead>
       <tbody>

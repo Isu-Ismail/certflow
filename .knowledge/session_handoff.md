@@ -126,3 +126,10 @@ Fixed from `review.md`:
 - `DesignSurface.#settle` times out after 10 s; `insertField` appends a text node instead of rewriting innerHTML.
 - SEO: title, description, canonical, OG/Twitter, JSON-LD, `<noscript>` text in `index.html`; `public/{robots.txt,sitemap.xml,og-image.png}` (URL https://codism.in/certflow/). Deploy workflow adds/validates them in the deploy branch.
 - Not done on purpose (would change UI): Ctrl+S toast wording, loading skeleton, a11y pass. Google Search Console: user must verify the property and submit https://codism.in/certflow/sitemap.xml.
+
+### UX items from the review (2026-10-06, done)
+
+- Loading state: `App.svelte` shows "Opening your workspace…" (spinner, `role=status`, `.cf-late` in `app.css` fades in after 0.3 s so fast loads never flash).
+- Ctrl+S / Save toast (`actions.saveNow`): says "Saved in this browser only…" with how to keep a copy, or "Saved in this browser and in the folder …" when linked (also syncs the folder).
+- Accessibility (axe-core 2a/2aa/best-practice clean on start, Data, Design, Flow, Generate): step colours darkened so white text passes 4.5:1 (data `#4563ee`, flow `#7a55ee`, in `app.css` AND `StepNav.svelte` — keep both in sync); sr-only `<h1>` in Header; skip link + focusable `<main id="main">`; `SourceTabs` tablist holds only tabs; empty table header labelled; file-list select checkbox visible on keyboard focus and touch (`pointer-coarse`). Re-run: axe via puppeteer-core against `pnpm preview`.
+- Still open: undo history is memory-only (say so in confirm texts), phone header density, "Import into new workspace" from an existing folder.
