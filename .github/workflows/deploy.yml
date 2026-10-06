@@ -17,6 +17,18 @@ jobs:
       - name: Checkout Source Code
         uses: actions/checkout@v4
 
+      # SEO files live in public/ (Vite copies them into dist/ on build). Make sure they are in the published
+      # folder even when dist/ was committed without them, and stamp today's date on the sitemap.
+      - name: Add SEO files (sitemap.xml, robots.txt, share image) to dist
+        run: |
+          for f in sitemap.xml robots.txt og-image.png; do
+            [ -f "dist/$f" ] || cp "public/$f" "dist/$f"
+          done
+          sed -i "s|<lastmod>.*</lastmod>|<lastmod>$(date -u +%F)</lastmod>|" dist/sitemap.xml
+          touch dist/.nojekyll
+          test -s dist/sitemap.xml && test -s dist/robots.txt && test -s dist/index.html
+          echo "dist contents:" && ls -la dist
+
       - name: Publish dist folder to deploy branch
         uses: peaceiris/actions-gh-pages@v4
         with:

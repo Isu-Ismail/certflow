@@ -2,14 +2,16 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Certificate of Appreciation - Metrology Virtual Lab</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Certificate of Appreciation</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800;1,600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap"
     rel="stylesheet">
 
   <style>
@@ -19,12 +21,21 @@
       padding: 0;
     }
 
+    @page {
+      size: 1056px 747px;
+      margin: 0;
+    }
+
+    html,
     body {
       width: 1056px;
       height: 747px;
-      margin: 0 auto;
-      background-color: #0b132b;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin: 0;
+    }
+
+    body {
+      background: #111827;
+      font-family: "Montserrat", sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -32,273 +43,510 @@
       print-color-adjust: exact;
     }
 
-    /* Certificate Outer Frame */
-    .certificate-container {
+    /* =========================================================
+       CERTIFICATE
+       ========================================================= */
+
+    .certificate {
       position: relative;
       width: 1056px;
       height: 747px;
-      background: radial-gradient(circle at 50% 50%, #ffffff 0%, #fcfaf4 65%, #f5eedb 100%);
       overflow: hidden;
+
+      background:
+        radial-gradient(circle at 50% 40%,
+          #ffffff 0%,
+          #faf8f0 48%,
+          #eee9da 100%);
+
+      color: #102a43;
     }
 
-    /* Dual Golden Border Frame */
-    .certificate-container::before {
+    .certificate::before {
       content: "";
       position: absolute;
-      top: 18px;
-      left: 18px;
-      right: 18px;
-      bottom: 18px;
-      border: 3px solid #b8860b;
+
+      width: 520px;
+      height: 520px;
+
+      left: -250px;
+      top: -270px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(circle,
+          rgba(191, 151, 63, 0.12),
+          transparent 70%);
+    }
+
+    .certificate::after {
+      content: "";
+      position: absolute;
+
+      width: 500px;
+      height: 500px;
+
+      right: -250px;
+      bottom: -280px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(circle,
+          rgba(16, 42, 67, 0.07),
+          transparent 70%);
+    }
+
+    /* =========================================================
+       BORDERS
+       ========================================================= */
+
+    .outer-border {
+      position: absolute;
+      inset: 17px;
+
+      border: 2px solid #b99132;
+
       pointer-events: none;
-      z-index: 1;
+      z-index: 10;
     }
 
-    .certificate-container::after {
-      content: "";
+    .inner-border {
       position: absolute;
+      inset: 27px;
+
+      border: 1px solid rgba(185, 145, 50, 0.75);
+
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .accent-border {
+      position: absolute;
+      inset: 34px;
+
+      border: 1px solid rgba(16, 42, 67, 0.16);
+
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* =========================================================
+       CORNERS
+       ========================================================= */
+
+    .corner {
+      position: absolute;
+
+      width: 58px;
+      height: 58px;
+
+      z-index: 11;
+
+      pointer-events: none;
+    }
+
+    .corner::before,
+    .corner::after {
+      content: "";
+
+      position: absolute;
+
+      background: #b99132;
+    }
+
+    .corner::before {
+      width: 58px;
+      height: 2px;
+    }
+
+    .corner::after {
+      width: 2px;
+      height: 58px;
+    }
+
+    .corner-tl {
       top: 25px;
       left: 25px;
+    }
+
+    .corner-tr {
+      top: 25px;
       right: 25px;
+      transform: rotate(90deg);
+    }
+
+    .corner-bl {
       bottom: 25px;
-      border: 1px solid #d4af37;
-      pointer-events: none;
-      z-index: 1;
+      left: 25px;
+      transform: rotate(-90deg);
     }
 
-    /* Decorative Corner Accents */
-    .corner-decor {
+    .corner-br {
+      bottom: 25px;
+      right: 25px;
+      transform: rotate(180deg);
+    }
+
+    /* =========================================================
+       HEADER
+       ========================================================= */
+
+    .header {
       position: absolute;
-      width: 45px;
-      height: 45px;
-      border: 3px solid #0f2c59;
-      z-index: 2;
-      pointer-events: none;
-    }
 
-    .top-left {
-      top: 22px;
-      left: 22px;
-      border-right: none;
-      border-bottom: none;
-    }
-
-    .top-right {
-      top: 22px;
-      right: 22px;
-      border-left: none;
-      border-bottom: none;
-    }
-
-    .bottom-left {
-      bottom: 22px;
-      left: 22px;
-      border-right: none;
-      border-top: none;
-    }
-
-    .bottom-right {
-      bottom: 22px;
-      right: 22px;
-      border-left: none;
-      border-top: none;
-    }
-
-    /* 1. Header Bar: Equal 50px Top and Side Margins */
-    .header-bar {
-      position: absolute;
       top: 50px;
-      left: 50px;
-      width: 956px;
-      height: 115px;
+      left: 65px;
+      right: 65px;
+
+      height: 112px;
+
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      z-index: 5;
+
+      z-index: 20;
     }
 
-    .logo-img {
+    .logo {
+      width: 108px;
+      height: 108px;
+
+      object-fit: contain;
+
+      flex-shrink: 0;
+    }
+
+    .logo-right {
       width: 112px;
       height: 112px;
-      object-fit: contain;
-      filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.12));
     }
 
-    .institution-info {
+    .institution {
       flex: 1;
+
       text-align: center;
-      padding: 0 15px;
+
+      padding: 0 25px;
     }
 
-    .univ-title {
-      font-family: 'Cinzel', serif;
-      font-size: 21px;
+    .university {
+      font-family: "Cinzel", serif;
+
+      font-size: 25px;
       font-weight: 800;
-      color: #0f2c59;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      line-height: 1.2;
+
+      letter-spacing: 3.2px;
+
+      color: #102a43;
+
+      line-height: 1.15;
     }
 
-    .institute-title {
-      font-family: 'Cinzel', serif;
-      font-size: 17.5px;
-      font-weight: 700;
-      color: #0f2c59;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-top: 4px;
-      line-height: 1.2;
-    }
-
-    .dept-title {
-      font-size: 13.5px;
-      font-weight: 700;
-      color: #b8860b;
-      letter-spacing: 2px;
+    .institute {
       margin-top: 6px;
-      text-transform: uppercase;
-    }
 
-    /* Content Area: Width = 836px, Centered (Left 110px) */
-    .cert-body {
-      position: absolute;
-      left: 110px;
-      width: 836px;
-      height: 100%;
-      z-index: 5;
-    }
+      font-family: "Cinzel", serif;
 
-    /* 2. Certificate Title */
-    .title-section {
-      position: absolute;
-      top: 205px;
-      width: 836px;
-      text-align: center;
-    }
-
-    .cert-heading {
-      font-family: 'Cinzel', serif;
-      font-size: 38px;
-      font-weight: 900;
-      color: #0f2c59;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      line-height: 1;
-    }
-
-    .cert-subheading {
-      font-size: 12.5px;
+      font-size: 19px;
       font-weight: 700;
-      color: #64748b;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      margin-top: 8px;
+
+      letter-spacing: 2.2px;
+
+      color: #102a43;
+
+      line-height: 1.2;
     }
 
-    /* 3. Recipient Name */
-    .recipient-section {
+    .department {
+      margin-top: 9px;
+
+      font-size: 13px;
+      font-weight: 800;
+
+      letter-spacing: 2.7px;
+
+      color: #a87818;
+
+      text-transform: uppercase;
+    }
+
+    /* =========================================================
+       HEADER SEPARATOR
+       ========================================================= */
+
+    .separator {
       position: absolute;
-      top: 300px;
-      width: 836px;
+
+      top: 174px;
+      left: 82px;
+      right: 82px;
+
+      height: 1px;
+
+      background:
+        linear-gradient(to right,
+          transparent,
+          #b99132 18%,
+          #b99132 82%,
+          transparent);
+
+      z-index: 15;
+    }
+
+    .separator-diamond {
+      position: absolute;
+
+      top: -4px;
+      left: 50%;
+
+      width: 9px;
+      height: 9px;
+
+      background: #b99132;
+
+      transform: translateX(-50%) rotate(45deg);
+    }
+
+    /* =========================================================
+       MAIN TITLE
+       ========================================================= */
+
+    .title-area {
+      position: absolute;
+
+      top: 201px;
+      left: 70px;
+      right: 70px;
+
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+
+      z-index: 20;
+    }
+
+    .certificate-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+
+      font-size: 43px;
+      font-weight: 800;
+
+      letter-spacing: 3.2px;
+
+      color: #102a43;
+
+      line-height: 1.1;
+
+      text-transform: uppercase;
+    }
+
+    .presented {
+      margin-top: 15px;
+
+      font-size: 11.5px;
+      font-weight: 600;
+
+      letter-spacing: 4.2px;
+
+      color: #6d7b8a;
+
+      text-transform: uppercase;
+    }
+
+    /* =========================================================
+       RECIPIENT
+       ========================================================= */
+
+    .recipient {
+      position: absolute;
+
+      top: 293px;
+      left: 80px;
+      right: 80px;
+
+      text-align: center;
+
+      z-index: 20;
     }
 
     .student-name {
-      font-family: 'Cormorant Garamond', 'Cinzel', serif;
-      font-size: 54px;
-      font-weight: 700;
-      color: #b8860b;
-      letter-spacing: 3.5px;
-      text-transform: uppercase;
-      line-height: 1;
       display: inline-block;
-    }
 
-    /* 4. Prose & Dedicated Experiment Section */
-    .prose-section {
-      position: absolute;
-      top: 405px;
-      width: 836px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
+      font-family: "Cormorant Garamond", serif;
 
-    .prose-intro {
-      font-size: 17px;
-      line-height: 1.7;
-      color: #334155;
-      font-weight: 500;
-      max-width: 830px;
-    }
+      font-size: 62px;
+      font-weight: 700;
 
-    .experiment-highlight-box {
-      margin-top: 12px;
-      font-family: 'Cinzel', serif;
-      font-size: 24px;
-      font-weight: 800;
-      color: #b8860b;
-      letter-spacing: 1.5px;
+      letter-spacing: 3.2px;
+
+      color: #a97916;
+
+      line-height: 1;
+
       text-transform: uppercase;
-      line-height: 1.35;
+
+      padding: 0 38px 9px;
     }
 
-    .highlight-bold {
-      font-weight: 800;
-      color: #0f2c59;
-    }
+    /* =========================================================
+       DESCRIPTION
+       ========================================================= */
 
-    /* 5. Footer Signatures */
-    .footer-bar {
+    /* The paragraph and the experiment block flow one after the other inside this block,
+       so the experiment always sits 22px under the paragraph - no script needed. */
+    .body-block {
       position: absolute;
-      top: 618px;
-      width: 836px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
+
+      top: 382px;
+
+      left: 135px;
+      right: 135px;
+
+      z-index: 20;
     }
 
-    .signature-box {
-      text-align: center;
-      width: 240px;
+    .description p {
+      width: 100%;
+
+      font-size: 15.5px;
+
+      line-height: 1.62;
+
+      font-weight: 500;
+
+      color: #34495e;
+
+      text-align: justify;
+      text-align-last: center;
+
+      letter-spacing: 0.05px;
+
+      hyphens: none;
     }
 
-    .sig-line {
-      width: 190px;
-      height: 2px;
-      background: #d4af37;
-      margin: 0 auto 8px;
-    }
-
-    .sig-title {
-      font-size: 13.5px;
+    .strong {
       font-weight: 800;
-      color: #0f2c59;
-      white-space: nowrap;
+      color: #102a43;
     }
 
-    .sig-sub {
-      font-size: 11px;
-      color: #64748b;
-      font-weight: 600;
-      line-height: 1.3;
-      margin-top: 3px;
+    .strong {
+      font-weight: 800;
+
+      color: #102a43;
     }
+
+    .experiment {
+      margin: 22px -30px 0;
+
+      text-align: center;
+    }
+
+    .experiment-label {
+      font-size: 10px;
+
+      font-weight: 800;
+
+      letter-spacing: 3.2px;
+
+      color: #53677b;
+
+      text-transform: uppercase;
+
+      margin-bottom: 9px;
+    }
+
+    .experiment-name {
+      font-family: "Cinzel", serif;
+
+      font-size: 22.5px;
+
+      font-weight: 800;
+
+      letter-spacing: 1.5px;
+
+      line-height: 1.35;
+
+      color: #102a43;
+
+      text-transform: uppercase;
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+
+    .footer {
+      position: absolute;
+
+      left: 110px;
+      right: 110px;
+
+      bottom: 58px;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: flex-end;
+
+      z-index: 20;
+    }
+
+    .signature {
+      width: 250px;
+
+      text-align: center;
+    }
+
+    .signature-line {
+      width: 190px;
+
+      height: 1px;
+
+      margin: 0 auto 7px;
+
+      background: #9f7925;
+    }
+
+    .signature-title {
+      font-size: 13px;
+
+      font-weight: 800;
+
+      color: #102a43;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.8px;
+    }
+
+    .signature-subtitle {
+      margin-top: 3px;
+
+      font-size: 10px;
+
+      font-weight: 500;
+
+      color: #718096;
+
+      line-height: 1.3;
+    }
+
+    /* =========================================================
+       PRINT
+       ========================================================= */
 
     @media print {
+
+      html,
       body {
-        background: none;
+        width: 1056px;
+        height: 747px;
+
+        background: white;
       }
 
-      .certificate-container {
-        border: none;
+      .certificate {
+        box-shadow: none;
       }
     }
   </style>
@@ -306,67 +554,152 @@
 
 <body>
 
-  <div class="certificate-container">
-    <div class="corner-decor top-left"></div>
-    <div class="corner-decor top-right"></div>
-    <div class="corner-decor bottom-left"></div>
-    <div class="corner-decor bottom-right"></div>
+  <div class="certificate">
 
-    <header class="header-bar">
-      <img src="./anna_logo.png" alt="Anna University Logo" class="logo-img" />
+    <!-- Borders -->
+    <div class="outer-border"></div>
+    <div class="inner-border"></div>
+    <div class="accent-border"></div>
 
-      <div class="institution-info">
-        <div class="univ-title">ANNA UNIVERSITY</div>
-        <div class="institute-title">MADRAS INSTITUTE OF TECHNOLOGY</div>
-        <div class="dept-title">DEPARTMENT OF PRODUCTION TECHNOLOGY</div>
+    <!-- Corner decorations -->
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="header">
+
+      <img src="./anna_logo.png" alt="Anna University Logo" class="logo">
+
+      <div class="institution">
+
+        <div class="university">
+          ANNA UNIVERSITY
+        </div>
+
+        <div class="institute">
+          MADRAS INSTITUTE OF TECHNOLOGY
+        </div>
+
+        <div class="department">
+          DEPARTMENT OF PRODUCTION TECHNOLOGY
+        </div>
+
       </div>
 
-      <img src="./mit_logo.png" alt="MIT Logo" class="logo-img" />
+      <img src="./mit_logo.png" alt="MIT Logo" class="logo logo-right">
+
     </header>
 
-    <div class="cert-body">
-      <div class="title-section">
-        <div class="cert-heading">CERTIFICATE OF APPRECIATION</div>
-        <div class="cert-subheading">THIS CERTIFICATE IS PROUDLY PRESENTED TO</div>
-      </div>
-
-      <div class="recipient-section">
-        <div class="student-name">{Name}</div>
-      </div>
-
-      <div class="prose-section">
-        <p class="prose-intro">
-          This certificate is awarded in recognition of the outstanding technical contributions of
-          <span class="highlight-bold">{Name}</span> (Roll No: <span class="highlight-bold">{Roll_Number}</span>),
-          working with team <span class="highlight-bold">{Team_ID}</span>, towards the development and virtualization of
-          Measurements &amp; Metrology Laboratory experiment:
-        </p>
-
-        <div class="experiment-highlight-box">
-          {Experiment_Name}
-        </div>
-      </div>
-
-      <footer class="footer-bar">
-        <div class="signature-box">
-          <div class="sig-line"></div>
-          <div class="sig-title">Lab Coordinator</div>
-          <div class="sig-sub">Virtual Laboratory Project</div>
-        </div>
-
-        <div class="signature-box">
-          <div class="sig-line"></div>
-          <div class="sig-title">Institution Seal</div>
-          <div class="sig-sub">[ Affix Seal Here ]</div>
-        </div>
-
-        <div class="signature-box">
-          <div class="sig-line"></div>
-          <div class="sig-title">Head of Department</div>
-          <div class="sig-sub">Department of Production Technology</div>
-        </div>
-      </footer>
+    <!-- Header separator -->
+    <div class="separator">
+      <div class="separator-diamond"></div>
     </div>
+
+    <!-- =====================================================
+         CERTIFICATE TITLE
+         ===================================================== -->
+
+    <section class="title-area">
+
+      <div class="certificate-title">
+        Certificate of Appreciation
+      </div>
+
+      <div class="presented">
+        This Certificate Is Proudly Presented To
+      </div>
+
+    </section>
+
+    <!-- =====================================================
+         RECIPIENT
+         ===================================================== -->
+
+    <section class="recipient">
+
+      <div class="student-name">
+        {Name}
+      </div>
+
+
+
+    </section>
+
+    <!-- =====================================================
+         DESCRIPTION
+         ===================================================== -->
+
+    <div class="body-block">
+
+    <section class="description">
+
+      <p>
+        <span class="strong">Roll Number: {Roll Number}</span> &middot; B.E. Production Engineering, Department of Production Technology, in recognition of their valuable contribution as a member of <span class="strong">{Team}</span> towards the successful virtualization of the Measurements &amp; Metrology Laboratory experiment, contributing to the development of an accessible and technology-enabled virtual laboratory environment.
+      </p>
+
+    </section>
+
+    <!-- =====================================================
+         EXPERIMENT
+         ===================================================== -->
+
+    <section class="experiment">
+
+      <div class="experiment-label">
+        Virtualized Laboratory Experiment
+      </div>
+
+      <div class="experiment-name">
+        {Title}
+      </div>
+
+    </section>
+
+    </div>
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="footer">
+
+      <div class="signature">
+
+        <div class="signature-line"></div>
+
+        <div class="signature-title">
+          Lab Coordinator
+        </div>
+
+        <div class="signature-subtitle">
+          Virtual Laboratory Project
+        </div>
+
+      </div>
+
+      <!-- Middle intentionally left empty -->
+
+      <div class="signature">
+
+        <div class="signature-line"></div>
+
+        <div class="signature-title">
+          Head of Department
+        </div>
+
+        <div class="signature-subtitle">
+          Department of Production Technology
+        </div>
+
+      </div>
+
+    </footer>
+
   </div>
 
 </body>

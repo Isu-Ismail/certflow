@@ -1,51 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
-  <defs>
-    <!-- Hard Neo-Brutalist Drop Shadow -->
-    <filter id="neo-shadow" x="-10%" y="-10%" width="140%" height="140%">
-      <feDropShadow dx="12" dy="12" stdDeviation="0" flood-color="#000000" flood-opacity="1"/>
-    </filter>
-  </defs>
-
-  <!-- Outer Yellow Background Card for Favicon Tab Icon -->
-  <rect x="24" y="24" width="464" height="464" rx="72" fill="#FACC15" stroke="#000000" stroke-width="16" filter="url(#neo-shadow)" />
-
-  <!-- Node Connection Branch Lines -->
-  <path d="M 120 370 L 120 330 L 256 330 L 256 290" fill="none" stroke="#000000" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
-  <path d="M 392 370 L 392 330 L 256 330" fill="none" stroke="#000000" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
-
-  <!-- 1. Centered Landscape Certificate Document (Top / Center) -->
-  <g filter="url(#neo-shadow)">
-    <rect x="86" y="80" width="340" height="220" rx="24" fill="#FFFFFF" stroke="#000000" stroke-width="12" />
-    <rect x="100" y="94" width="312" height="192" rx="16" fill="none" stroke="#FACC15" stroke-width="5" stroke-dasharray="10 5" />
-    <rect x="166" y="115" width="180" height="18" rx="6" fill="#0F2C59" />
-
-    <!-- Center Gold Award Seal with Pink Ribbon Tails -->
-    <path d="M 256 200 L 236 245 L 256 235 L 276 245 Z" fill="#EC4899" stroke="#000000" stroke-width="4" stroke-linejoin="round" />
-    <circle cx="256" cy="180" r="28" fill="#A3E635" stroke="#000000" stroke-width="6" />
-    <polygon points="256,164 261,176 274,177 265,186 267,198 256,192 245,198 247,186 238,177 251,176" fill="#FACC15" stroke="#000000" stroke-width="3" />
-
-    <!-- Recipient Calligraphy Line -->
-    <path d="M 130 220 Q 256 195 382 220" fill="none" stroke="#B8860B" stroke-width="4" stroke-linecap="round" />
-    <line x1="140" y1="232" x2="372" y2="232" stroke="#D4AF37" stroke-width="3" />
-
-    <line x1="130" y1="262" x2="190" y2="262" stroke="#000000" stroke-width="3" />
-    <line x1="322" y1="262" x2="382" y2="262" stroke="#000000" stroke-width="3" />
-  </g>
-
-  <!-- 2. Symmetrical Flow Nodes (Bottom Row) -->
-  <g filter="url(#neo-shadow)">
-    <rect x="65" y="360" width="110" height="66" rx="20" fill="#22D3EE" stroke="#000000" stroke-width="9" />
-    <circle cx="120" cy="393" r="14" fill="#FFFFFF" stroke="#000000" stroke-width="5" />
-    <circle cx="120" cy="393" r="5" fill="#000000" />
-  </g>
-
-  <g filter="url(#neo-shadow)">
-    <rect x="201" y="360" width="110" height="66" rx="20" fill="#C084FC" stroke="#000000" stroke-width="9" />
-    <path d="M 236 393 L 276 393 M 264 381 L 278 393 L 264 405" stroke="#000000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
-  </g>
-
-  <g filter="url(#neo-shadow)">
-    <rect x="337" y="360" width="110" height="66" rx="20" fill="#A3E635" stroke="#000000" stroke-width="9" />
-    <polyline points="380,383 392,393 380,403" fill="none" stroke="#000000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
-  </g>
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="64" height="64" fill="#1E1E1E"/>
+<g id="CertFlow / Favicon">
+<path id="Vector" d="M49 7H19C12.3726 7 7 12.3726 7 19V49C7 55.6274 12.3726 61 19 61H49C55.6274 61 61 55.6274 61 49V19C61 12.3726 55.6274 7 49 7Z" fill="#151515"/>
+<path id="Vector_2" d="M45 3H15C8.37258 3 3 8.37258 3 15V45C3 51.6274 8.37258 57 15 57H45C51.6274 57 57 51.6274 57 45V15C57 8.37258 51.6274 3 45 3Z" fill="#FF8066" stroke="#151515" stroke-width="3"/>
+<path id="Vector_3" d="M41 20H29C22 20 18 24 18 31V33C18 40 22 44 29 44H40" stroke="#151515" stroke-width="7" stroke-linecap="square"/>
+<path id="Vector_4" d="M45 36H37C35.3431 36 34 37.3431 34 39V47C34 48.6569 35.3431 50 37 50H45C46.6569 50 48 48.6569 48 47V39C48 37.3431 46.6569 36 45 36Z" fill="#7ED8B5" stroke="#151515" stroke-width="3"/>
+<g id="Paper / text lines">
+<path id="Vector_5" d="M38 41H44M38 45H42" stroke="#151515" stroke-width="1.5" stroke-linecap="round"/>
+</g>
+</g>
 </svg>

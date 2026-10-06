@@ -2,14 +2,57 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https:; img-src 'self' data: blob: https:; font-src 'self' data: https:;" />
-    <title>CertFlow - Neo-Brutalist Certificate Studio</title>
-    <script type="module" crossorigin src="./assets/index-BwD8kEqw.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-BzHuAOs4.css">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' blob: data: https: ws://localhost:* ws://127.0.0.1:*; frame-src 'self' blob: data:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'none'"
+    />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="theme-color" content="#f6f1e4" />
+
+    <title>CertFlow — Free Bulk Certificate Generator from CSV or Excel</title>
+    <meta name="description" content="Design a certificate once, load a CSV or Excel list, and generate hundreds of personalised PDF certificates in your browser. Free, private, no sign-up." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://codism.in/certflow/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CertFlow" />
+    <meta property="og:title" content="CertFlow — Free Bulk Certificate Generator" />
+    <meta property="og:description" content="Turn a CSV or Excel list into personalised PDF certificates in your browser. Free and private." />
+    <meta property="og:url" content="https://codism.in/certflow/" />
+    <meta property="og:image" content="https://codism.in/certflow/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CertFlow — Free Bulk Certificate Generator" />
+    <meta name="twitter:description" content="Turn a CSV or Excel list into personalised PDF certificates in your browser. Free and private." />
+    <meta name="twitter:image" content="https://codism.in/certflow/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "CertFlow",
+        "url": "https://codism.in/certflow/",
+        "description": "Free browser-based tool that generates personalised PDF certificates in bulk from a CSV or Excel file and a certificate design.",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any (web browser)",
+        "browserRequirements": "Requires JavaScript",
+        "image": "https://codism.in/certflow/og-image.png",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    </script>
+    <script type="module" crossorigin src="./assets/index-BrwfDCMd.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/rolldown-runtime-Dd_uD5pT.js">
+    <link rel="modulepreload" crossorigin href="./assets/index-client-C8VBOppW.js">
+    <link rel="stylesheet" crossorigin href="./assets/index-DMxxIIPu.css">
   </head>
   <body>
     <div id="app"></div>
+    <noscript>
+      <h1>CertFlow — free bulk certificate generator</h1>
+      <p>CertFlow turns a CSV or Excel list into personalised PDF certificates. Add your data, design the certificate, choose which design each person gets, and generate every PDF in your browser. Your files never leave your computer.</p>
+      <p>This app needs JavaScript. Please enable it to continue.</p>
+    </noscript>
   </body>
 </html>

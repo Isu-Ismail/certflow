@@ -1,61 +1,42 @@
 @import "tailwindcss";
 
-:root {
-  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  color-scheme: light;
+/* Clean brutalism: paper, ink, 2px borders, hard shadows. Light only. */
+@theme {
+  --font-ui: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --color-paper: #f4f1e8;
+  --color-ink: #121212;
+  --color-mute: #706c62;
+  --color-soft: #e7e3d6;
+  --shadow-hard: 3px 3px 0 #121212;
+  --shadow-hard-lg: 5px 5px 0 #121212;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #FAF8F5;
-  /* Retro Neo-Brutalist Dot Grid Pattern */
-  background-image: radial-gradient(#000000 1.5px, transparent 1.5px);
-  background-size: 20px 20px;
-  background-position: 0 0;
-  color: #0F172A;
-  min-height: 100vh;
-  overflow-x: hidden;
+/* Each step owns one colour. body[data-step] switches --c, and `step` utilities follow it. */
+@theme inline {
+  --color-step: var(--c);
+  --color-on-step: var(--on);
+  --color-step-soft: var(--soft-c);
 }
 
-/* Neo-Brutalist Custom Helper Classes */
-.neo-border {
-  border: 3px solid #000000;
+:root { color-scheme: light; --c: #5b7cff; --on: #ffffff; --soft-c: #e4e9ff; }
+body[data-step='data']   { --c: #5b7cff; --on: #ffffff; --soft-c: #e4e9ff; }
+body[data-step='design'] { --c: #ff7a59; --on: #121212; --soft-c: #ffe6de; }
+body[data-step='flow']   { --c: #9a78ff; --on: #ffffff; --soft-c: #ece6ff; }
+body[data-step='generate'] { --c: #2fc99a; --on: #121212; --soft-c: #d8f6ec; }
+
+/* Scrolls normally, but the scrollbar is not drawn. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
 }
 
-.neo-border-sm {
-  border: 2px solid #000000;
-}
-
-.neo-shadow {
-  box-shadow: 4px 4px 0px 0px #000000;
-}
-
-.neo-shadow-lg {
-  box-shadow: 6px 6px 0px 0px #000000;
-}
-
-.neo-shadow-xl {
-  box-shadow: 8px 8px 0px 0px #000000;
-}
-
-.neo-button {
-  border: 3px solid #000000;
-  box-shadow: 4px 4px 0px 0px #000000;
-  transition: all 0.1s ease-in-out;
-}
-
-.neo-button:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px 0px #000000;
-}
-
-.neo-button:active {
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0px 0px #000000;
-}
-
-#app {
-  width: 100%;
-  min-height: 100vh;
+@layer base {
+  html { font-family: var(--font-ui); -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--color-paper); color: var(--color-ink); overflow: hidden; }
+  button { cursor: pointer; }
+  :focus-visible { outline: 3px solid var(--c); outline-offset: 2px; }
+  input, select { font: inherit; }
+  /* text fields: no default blue ring, a hard step-colour shadow instead */
+  input:focus-visible, select:focus-visible { outline: none; box-shadow: 3px 3px 0 var(--c); }
 }

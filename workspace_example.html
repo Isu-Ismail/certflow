@@ -1,0 +1,2678 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+<title>CertFlow Studio — Modern Intelligent Certificate Workspace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Cinzel:wght@600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" />
+
+<style>
+  /* ==========================================================================
+     APPLE & GOOGLE DESIGN SYSTEM: DESIGN TOKENS & THEMING
+     ========================================================================== */
+  :root {
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Google Sans', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+
+    /* Light Theme (Apple macOS Sequoia / Google Material You neutral-tonal) */
+    --bg-base: #f5f6f9;
+    --bg-surface: #ffffff;
+    --bg-surface-elevated: #ffffff;
+    --bg-surface-glass: rgba(255, 255, 255, 0.82);
+    --bg-canvas: #e8ebf0;
+    --bg-subtle: #f0f2f6;
+    --bg-hover: #eaf0fa;
+
+    --border-subtle: rgba(0, 0, 0, 0.07);
+    --border-strong: rgba(0, 0, 0, 0.14);
+    --border-focus: rgba(0, 113, 227, 0.45);
+
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --text-tertiary: #9ca3af;
+    --text-inverse: #ffffff;
+
+    /* System Vibrant Accents */
+    --accent-blue: #0071e3;
+    --accent-blue-hover: #0062c4;
+    --accent-blue-subtle: #e8f3ff;
+    
+    --accent-emerald: #10b981;
+    --accent-emerald-subtle: #ecfdf5;
+    
+    --accent-amber: #f59e0b;
+    --accent-amber-subtle: #fffbeb;
+    
+    --accent-purple: #8b5cf6;
+    --accent-purple-subtle: #f5f3ff;
+    
+    --accent-rose: #f43f5e;
+    --accent-rose-subtle: #fff1f2;
+
+    /* Dynamic Step Accent */
+    --step-accent: var(--accent-blue);
+    --step-accent-subtle: var(--accent-blue-subtle);
+
+    /* Elevation Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
+    --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.07), 0 4px 10px -4px rgba(0, 0, 0, 0.04);
+    --shadow-floating: 0 20px 35px -5px rgba(0, 0, 0, 0.1), 0 10px 15px -5px rgba(0, 0, 0, 0.04);
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 22px;
+    --radius-pill: 9999px;
+
+    --transition-apple: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  [data-theme="dark"] {
+    --bg-base: #0c0e14;
+    --bg-surface: #141822;
+    --bg-surface-elevated: #1a202c;
+    --bg-surface-glass: rgba(20, 24, 34, 0.84);
+    --bg-canvas: #08090d;
+    --bg-subtle: #1c2230;
+    --bg-hover: #232b3d;
+
+    --border-subtle: rgba(255, 255, 255, 0.09);
+    --border-strong: rgba(255, 255, 255, 0.16);
+    --border-focus: rgba(96, 165, 250, 0.55);
+
+    --text-primary: #f9fafb;
+    --text-secondary: #cbd5e1;
+    --text-tertiary: #64748b;
+    --text-inverse: #0c0e14;
+
+    --accent-blue: #3b82f6;
+    --accent-blue-hover: #60a5fa;
+    --accent-blue-subtle: rgba(59, 130, 246, 0.16);
+
+    --accent-emerald: #10b981;
+    --accent-emerald-subtle: rgba(16, 185, 129, 0.16);
+
+    --accent-amber: #fbbf24;
+    --accent-amber-subtle: rgba(251, 191, 36, 0.16);
+
+    --accent-purple: #a78bfa;
+    --accent-purple-subtle: rgba(167, 139, 250, 0.16);
+
+    --accent-rose: #fb7185;
+    --accent-rose-subtle: rgba(251, 113, 133, 0.16);
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 12px 30px rgba(0, 0, 0, 0.55);
+    --shadow-floating: 0 24px 45px rgba(0, 0, 0, 0.7);
+  }
+
+  /* Step thematic colors */
+  body[data-active-step="data"]   { --step-accent: var(--accent-blue); --step-accent-subtle: var(--accent-blue-subtle); }
+  body[data-active-step="design"] { --step-accent: #f97316; --step-accent-subtle: rgba(249, 115, 22, 0.12); }
+  body[data-active-step="flow"]   { --step-accent: var(--accent-purple); --step-accent-subtle: var(--accent-purple-subtle); }
+  body[data-active-step="export"] { --step-accent: var(--accent-emerald); --step-accent-subtle: var(--accent-emerald-subtle); }
+
+  /* ==========================================================================
+     BASE & RESET
+     ========================================================================== */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-primary);
+    background-color: var(--bg-base);
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+  }
+
+  a {
+    color: var(--accent-blue);
+    text-decoration: none;
+  }
+
+  code, .mono {
+    font-family: var(--font-mono);
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* ==========================================================================
+     CORE UI PRIMITIVES (APPLE HIG & MATERIAL 3 REFINED)
+     ========================================================================== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 38px;
+    padding: 0 16px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 13.5px;
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-apple);
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  .btn:hover {
+    background: var(--bg-hover);
+    border-color: var(--border-strong);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  .btn.primary {
+    background: var(--accent-blue);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 2px 8px rgba(0, 113, 227, 0.35);
+  }
+
+  .btn.primary:hover {
+    background: var(--accent-blue-hover);
+    box-shadow: 0 4px 14px rgba(0, 113, 227, 0.45);
+  }
+
+  .btn.step-btn {
+    background: var(--step-accent);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn.sm {
+    height: 30px;
+    padding: 0 10px;
+    font-size: 12px;
+    border-radius: var(--radius-sm);
+  }
+
+  .btn.lg {
+    height: 46px;
+    padding: 0 22px;
+    font-size: 15px;
+    border-radius: var(--radius-lg);
+  }
+
+  .btn.ghost {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    color: var(--text-secondary);
+  }
+
+  .btn.ghost:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+  }
+
+  .btn.icon-only {
+    width: 36px;
+    padding: 0;
+  }
+
+  .btn.icon-only.sm {
+    width: 28px;
+    height: 28px;
+  }
+
+  /* Inputs & Form Controls */
+  .input-field, select.input-field {
+    height: 38px;
+    padding: 0 12px;
+    border-radius: var(--radius-md);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-sm);
+    outline: none;
+    transition: var(--transition-apple);
+  }
+
+  .input-field:focus, select.input-field:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px var(--border-focus);
+  }
+
+  .field-label {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+    margin-bottom: 6px;
+  }
+
+  /* Segmented Controls (macOS / iOS native glass pill) */
+  .segmented-control {
+    display: inline-flex;
+    background: var(--bg-subtle);
+    padding: 3px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-subtle);
+    position: relative;
+    gap: 2px;
+  }
+
+  .segmented-control button {
+    height: 30px;
+    padding: 0 14px;
+    border: none;
+    background: transparent;
+    border-radius: var(--radius-pill);
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition-apple);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .segmented-control button:hover {
+    color: var(--text-primary);
+  }
+
+  .segmented-control button.active {
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-sm);
+  }
+
+  [data-theme="dark"] .segmented-control button.active {
+    background: var(--bg-surface-elevated);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  }
+
+  /* Badges & Chips */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+    background: var(--bg-subtle);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .badge.success {
+    background: var(--accent-emerald-subtle);
+    color: var(--accent-emerald);
+    border-color: rgba(16, 185, 129, 0.25);
+  }
+
+  .badge.warning {
+    background: var(--accent-amber-subtle);
+    color: var(--accent-amber);
+    border-color: rgba(245, 158, 11, 0.25);
+  }
+
+  .badge.blue {
+    background: var(--accent-blue-subtle);
+    color: var(--accent-blue);
+    border-color: rgba(0, 113, 227, 0.25);
+  }
+
+  /* Sleek Apple-style Surface Cards */
+  .surface-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-apple);
+  }
+
+  .surface-card:hover {
+    border-color: var(--border-strong);
+  }
+
+  /* ==========================================================================
+     APP HEADER & NAVIGATION BAR
+     ========================================================================== */
+  .app-header {
+    height: 64px;
+    background: var(--bg-surface-glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 100;
+    gap: 16px;
+  }
+
+  .brand-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 17px;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+
+  .brand-glyph {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #0071e3 0%, #8b5cf6 100%);
+    color: #ffffff;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    box-shadow: 0 4px 12px rgba(0, 113, 227, 0.35);
+  }
+
+  .workspace-selector {
+    position: relative;
+  }
+
+  .workspace-trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-subtle);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--text-primary);
+    transition: var(--transition-apple);
+  }
+
+  .workspace-trigger:hover {
+    background: var(--bg-hover);
+    border-color: var(--border-strong);
+  }
+
+  .workspace-trigger small {
+    color: var(--text-tertiary);
+    font-weight: 500;
+  }
+
+  /* Cloud Sync Indicator */
+  .sync-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+  }
+
+  .sync-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent-emerald);
+    box-shadow: 0 0 0 2px var(--accent-emerald-subtle);
+    animation: pulse 2.5s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.85); }
+  }
+
+  /* Step Bar Navigator (Apple / Material 3 Pill System) */
+  .steps-nav {
+    display: flex;
+    align-items: center;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-pill);
+    padding: 4px;
+    gap: 4px;
+  }
+
+  .step-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: var(--radius-pill);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 13px;
+    transition: var(--transition-apple);
+    position: relative;
+  }
+
+  .step-tab .step-index {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.08);
+    display: grid;
+    place-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    transition: var(--transition-apple);
+  }
+
+  [data-theme="dark"] .step-tab .step-index {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .step-tab:hover {
+    color: var(--text-primary);
+  }
+
+  .step-tab.active {
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-sm);
+  }
+
+  [data-theme="dark"] .step-tab.active {
+    background: var(--bg-surface-elevated);
+  }
+
+  .step-tab.active .step-index {
+    background: var(--step-accent);
+    color: #ffffff;
+  }
+
+  .step-tab .step-meta {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .step-tab .step-meta {
+      display: inline-block;
+    }
+  }
+
+  /* Header Actions */
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* ==========================================================================
+     STAGE CONTAINER & ACTIVE VIEWS
+     ========================================================================== */
+  .app-stage {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    background: var(--bg-base);
+  }
+
+  .view-container {
+    display: none;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    position: relative;
+  }
+
+  .view-container.active {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .view-inner {
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 32px 28px 60px;
+  }
+
+  .view-header {
+    margin-bottom: 28px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .view-title-group h1 {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .view-title-group p {
+    font-size: 14.5px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  /* ==========================================================================
+     STEP 1: DATA STUDIO
+     ========================================================================== */
+  .metrics-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .metric-card {
+    padding: 16px 20px;
+    border-radius: var(--radius-lg);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .metric-card .label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .metric-card .value {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-top: 4px;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  .data-grid-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 992px) {
+    .data-grid-layout {
+      grid-template-columns: 360px 1fr;
+    }
+  }
+
+  /* Source File Info Box */
+  .source-card {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .file-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .file-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: var(--accent-blue-subtle);
+    color: var(--accent-blue);
+    display: grid;
+    place-items: center;
+  }
+
+  .file-details b {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .file-details span {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+  }
+
+  /* Field Mapping Module */
+  .mapping-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .mapping-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border-radius: var(--radius-md);
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-subtle);
+    gap: 10px;
+  }
+
+  .mapping-var {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--accent-blue);
+    background: var(--bg-surface);
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .mapping-select {
+    height: 32px;
+    padding: 0 10px;
+    font-size: 12.5px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+  }
+
+  /* Data Table Preview */
+  .table-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .table-toolbar {
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-bottom: 1px solid var(--border-subtle);
+    flex-wrap: wrap;
+  }
+
+  .search-wrapper {
+    position: relative;
+    width: 260px;
+    max-width: 100%;
+  }
+
+  .search-wrapper svg {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-tertiary);
+    width: 16px;
+    height: 16px;
+  }
+
+  .search-wrapper input {
+    width: 100%;
+    height: 34px;
+    padding-left: 34px;
+    font-size: 13px;
+  }
+
+  .table-scroll-area {
+    max-height: 440px;
+    overflow: auto;
+  }
+
+  table.apple-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    text-align: left;
+  }
+
+  table.apple-table th {
+    position: sticky;
+    top: 0;
+    background: var(--bg-subtle);
+    padding: 10px 16px;
+    font-weight: 700;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-strong);
+    z-index: 10;
+  }
+
+  table.apple-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+  }
+
+  table.apple-table tbody tr {
+    transition: background 0.15s ease;
+  }
+
+  table.apple-table tbody tr:hover {
+    background: var(--bg-hover);
+  }
+
+  /* ==========================================================================
+     STEP 2: DESIGN CANVAS & INSPECTOR
+     ========================================================================== */
+  .design-workspace {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .canvas-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-canvas);
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Top Canvas Navigation Bar */
+  .canvas-topbar {
+    height: 52px;
+    background: var(--bg-surface-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    gap: 12px;
+    z-index: 20;
+    overflow-x: auto;
+  }
+
+  .template-pills {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .template-pill {
+    padding: 5px 12px;
+    border-radius: var(--radius-pill);
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid transparent;
+    transition: var(--transition-apple);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .template-pill:hover {
+    background: var(--bg-subtle);
+    color: var(--text-primary);
+  }
+
+  .template-pill.active {
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    border-color: var(--border-subtle);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .template-pill.new {
+    border: 1px dashed var(--border-strong);
+    color: var(--text-tertiary);
+  }
+
+  /* Floating Canvas Center Controller */
+  .canvas-controls-center {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .record-stepper {
+    display: inline-flex;
+    align-items: center;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-sm);
+    padding: 2px 4px;
+    gap: 6px;
+  }
+
+  .record-stepper .name-badge {
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 0 6px;
+    min-width: 170px;
+    text-align: center;
+  }
+
+  /* Zoom Controller */
+  .zoom-controls {
+    display: inline-flex;
+    align-items: center;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-pill);
+    padding: 2px 6px;
+    gap: 4px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .zoom-value {
+    font-size: 11.5px;
+    font-family: var(--font-mono);
+    min-width: 38px;
+    text-align: center;
+  }
+
+  /* Main Interactive Canvas Viewport */
+  .canvas-viewport {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    position: relative;
+  }
+
+  .cert-scaler-wrapper {
+    position: relative;
+    box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.2), 0 0 0 1px var(--border-subtle);
+    border-radius: 4px;
+    background: #ffffff;
+    transition: transform 0.15s ease-out;
+    transform-origin: center center;
+  }
+
+  /* Certificate Template Document (1056x747 standard) */
+  .cert-paper {
+    position: relative;
+    width: 1056px;
+    height: 747px;
+    background: #fbf8f1;
+    color: #1f2d4d;
+    font-family: 'EB Garamond', serif;
+    overflow: hidden;
+  }
+
+  .cert-paper.gold {
+    background: radial-gradient(ellipse at center, #fffbf2 0%, #f6edd7 100%);
+  }
+
+  .cert-layer {
+    position: absolute;
+    text-align: center;
+    cursor: pointer;
+    transition: outline 0.1s ease;
+  }
+
+  .cert-layer:hover {
+    outline: 2px dashed rgba(0, 113, 227, 0.6);
+    outline-offset: 4px;
+  }
+
+  .cert-layer.selected {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 4px;
+    background: rgba(0, 113, 227, 0.08);
+  }
+
+  .cert-layer.selected::after {
+    content: attr(data-tag);
+    position: absolute;
+    top: -28px;
+    left: 0;
+    background: var(--accent-blue);
+    color: #ffffff;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(0, 113, 227, 0.4);
+    pointer-events: none;
+    z-index: 50;
+  }
+
+  /* Certificate inner styling */
+  .cert-frame-outer {
+    position: absolute;
+    inset: 16px;
+    border: 3px solid #1f2d4d;
+  }
+
+  .cert-frame-inner {
+    position: absolute;
+    inset: 26px;
+    border: 1px solid #b08d3c;
+  }
+
+  .cert-paper.gold .cert-frame-outer {
+    border-color: #b08d3c;
+    border-width: 5px;
+  }
+
+  .cert-univ { font: 700 30px/1.1 'Cinzel', serif; letter-spacing: 5px; }
+  .cert-inst { font: 600 15px 'Cinzel', serif; letter-spacing: 3px; margin-top: 6px; }
+  .cert-dept { font-style: italic; font-size: 17px; color: #5b6478; margin-top: 4px; }
+  .cert-title { font: 600 38px 'Cinzel', serif; letter-spacing: 2px; }
+  .cert-pre { font-style: italic; font-size: 19px; color: #5b6478; }
+  .cert-name { font: 64px/1.3 'Great Vibes', cursive; white-space: nowrap; }
+  .cert-body { font-size: 18px; line-height: 1.55; color: #3a4252; }
+  .cert-body b { color: #1f2d4d; font-weight: 600; }
+  .cert-subhead { font: 600 12px 'Cinzel', serif; letter-spacing: 4px; color: #b08d3c; }
+  .cert-topic { font: italic 600 27px 'Playfair Display', serif; margin-top: 6px; }
+  .cert-sigline { height: 1px; background: #1f2d4d; margin-bottom: 8px; }
+  .cert-sigt { font: 600 14px 'Cinzel', serif; letter-spacing: 1px; }
+  .cert-sigs { font-style: italic; font-size: 14px; color: #5b6478; }
+  .cert-seal {
+    width: 104px;
+    height: 104px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #f3d98b, #b08d3c 70%);
+    box-shadow: 0 0 0 3px #b08d3c;
+    border: 3px double #fbf8f1;
+    color: #fffaf0;
+    font: 700 13px/1.2 'Cinzel', serif;
+    letter-spacing: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .field-token {
+    background: var(--accent-blue);
+    color: #ffffff;
+    padding: 1px 7px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.65em;
+    letter-spacing: 0;
+  }
+
+  /* Side Inspector (Apple macOS sidebar look) */
+  .inspector-sidebar {
+    width: 320px;
+    background: var(--bg-surface);
+    border-left: 1px solid var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+    z-index: 30;
+    transition: transform 0.25s ease;
+  }
+
+  .inspector-header {
+    padding: 14px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .inspector-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 18px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .token-chip-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .token-chip {
+    padding: 5px 10px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-subtle);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: var(--transition-apple);
+  }
+
+  .token-chip:hover {
+    background: var(--accent-blue-subtle);
+    color: var(--accent-blue);
+    border-color: var(--accent-blue);
+    transform: translateY(-1px);
+  }
+
+  .assets-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .asset-box {
+    aspect-ratio: 1;
+    border-radius: var(--radius-md);
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-subtle);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 6px;
+    transition: var(--transition-apple);
+  }
+
+  .asset-box img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .asset-box:hover {
+    background: var(--bg-hover);
+    border-color: var(--border-strong);
+    transform: scale(1.03);
+  }
+
+  .asset-box.upload {
+    border-style: dashed;
+    color: var(--text-tertiary);
+    font-size: 20px;
+  }
+
+  /* Code View Mode */
+  .code-view-container {
+    width: 100%;
+    height: 100%;
+    padding: 24px;
+    background: #181b24;
+    color: #e2e8f0;
+    overflow: auto;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.6;
+    border-radius: var(--radius-lg);
+  }
+
+  /* ==========================================================================
+     STEP 3: FLOW ROUTING STUDIO
+     ========================================================================== */
+  .flow-distribution-bar {
+    height: 38px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    display: flex;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-subtle);
+    margin-bottom: 24px;
+  }
+
+  .flow-dist-segment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12.5px;
+    color: #ffffff;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0 10px;
+  }
+
+  .rule-card {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .rule-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .rule-builder-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-weight: 600;
+  }
+
+  /* ==========================================================================
+     STEP 4: EXPORT CENTER
+     ========================================================================== */
+  .export-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  @media (min-width: 992px) {
+    .export-layout {
+      grid-template-columns: 380px 1fr;
+    }
+  }
+
+  .export-option-card {
+    padding: 16px;
+    border-radius: var(--radius-lg);
+    background: var(--bg-surface);
+    border: 2px solid var(--border-subtle);
+    cursor: pointer;
+    transition: var(--transition-apple);
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+
+  .export-option-card:hover {
+    border-color: var(--border-strong);
+    background: var(--bg-hover);
+  }
+
+  .export-option-card.selected {
+    border-color: var(--accent-emerald);
+    background: var(--accent-emerald-subtle);
+  }
+
+  .export-option-card input[type="radio"] {
+    accent-color: var(--accent-emerald);
+    margin-top: 3px;
+    width: 17px;
+    height: 17px;
+  }
+
+  .export-progress-box {
+    margin-top: 20px;
+    padding: 16px;
+    border-radius: var(--radius-md);
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-subtle);
+    display: none;
+  }
+
+  .progress-track {
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    margin: 10px 0;
+  }
+
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #10b981, #059669);
+    border-radius: 4px;
+    transition: width 0.2s ease;
+  }
+
+  /* Certificate Thumbnail Wall */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 18px;
+  }
+
+  .thumb-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-apple);
+    cursor: pointer;
+  }
+
+  .thumb-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--border-strong);
+  }
+
+  .thumb-preview-frame {
+    width: 100%;
+    aspect-ratio: 1056 / 747;
+    background: #ffffff;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .thumb-caption {
+    padding: 10px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .thumb-caption b {
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .thumb-caption span {
+    font-size: 11px;
+    color: var(--text-tertiary);
+  }
+
+  /* ==========================================================================
+     MODALS, DRAWER, POPOVER & TOAST
+     ========================================================================== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .modal-overlay.open {
+    display: flex;
+    opacity: 1;
+  }
+
+  .modal-window {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-floating);
+    width: 100%;
+    max-width: 480px;
+    overflow: hidden;
+    transform: scale(0.95);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .modal-overlay.open .modal-window {
+    transform: scale(1);
+  }
+
+  .modal-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .modal-body {
+    padding: 20px;
+  }
+
+  .modal-footer {
+    padding: 14px 20px;
+    background: var(--bg-subtle);
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  /* File Tree in Popover */
+  .tree-node {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--text-secondary);
+  }
+
+  .tree-node:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+  }
+
+  .tree-node.depth-1 { margin-left: 20px; }
+  .tree-node.depth-2 { margin-left: 40px; }
+
+  /* Apple-style floating toast */
+  .toast-notification {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--bg-surface-elevated);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    padding: 12px 18px;
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13.5px;
+    font-weight: 600;
+    z-index: 2000;
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+    pointer-events: none;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .toast-notification.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  /* ==========================================================================
+     MOBILE & RESPONSIVE ADAPTATIONS
+     ========================================================================== */
+  @media (max-width: 768px) {
+    .app-header {
+      padding: 0 12px;
+      height: 58px;
+    }
+
+    .brand-logo span {
+      display: none;
+    }
+
+    .sync-indicator {
+      display: none;
+    }
+
+    .steps-nav {
+      position: fixed;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      z-index: 900;
+      justify-content: space-around;
+      box-shadow: var(--shadow-lg);
+      background: var(--bg-surface-glass);
+      backdrop-filter: blur(20px);
+      padding: 6px;
+    }
+
+    .view-inner {
+      padding: 16px 14px 90px;
+    }
+
+    .canvas-viewport {
+      padding: 16px;
+    }
+
+    .inspector-sidebar {
+      position: absolute;
+      top: 52px;
+      right: 0;
+      bottom: 0;
+      width: 280px;
+      transform: translateX(100%);
+      box-shadow: var(--shadow-floating);
+    }
+
+    .inspector-sidebar.open-mobile {
+      transform: translateX(0);
+    }
+  }
+</style>
+</head>
+
+<body data-active-step="data">
+
+  <!-- ==========================================================================
+       TOP APP HEADER
+       ========================================================================== -->
+  <header class="app-header">
+    <div class="brand-group">
+      <div class="brand-logo">
+        <div class="brand-glyph">C</div>
+        <span>CertFlow</span>
+      </div>
+
+      <div class="workspace-selector">
+        <button class="workspace-trigger" id="wsButton">
+          <svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          <span id="wsLabel">metrology-lab</span>
+          <small>▾</small>
+        </button>
+      </div>
+
+      <div class="sync-indicator">
+        <div class="sync-dot"></div>
+        <span>Synced</span>
+      </div>
+    </div>
+
+    <!-- Apple Segmented Step Bar -->
+    <nav class="steps-nav" id="stepNavBar">
+      <button class="step-tab active" data-step="data">
+        <span class="step-index">1</span>
+        <span>Data</span>
+        <span class="step-meta">· 12 rows</span>
+      </button>
+      <button class="step-tab" data-step="design">
+        <span class="step-index">2</span>
+        <span>Design</span>
+        <span class="step-meta">· 2 certs</span>
+      </button>
+      <button class="step-tab" data-step="flow">
+        <span class="step-index">3</span>
+        <span>Flow</span>
+        <span class="step-meta">· 1 rule</span>
+      </button>
+      <button class="step-tab" data-step="export">
+        <span class="step-index">4</span>
+        <span>Export</span>
+        <span class="step-meta">· Ready</span>
+      </button>
+    </nav>
+
+    <div class="header-actions">
+      <!-- Dark/Light Mode Switcher -->
+      <button class="btn ghost icon-only sm" id="themeToggle" title="Toggle Light/Dark Theme">
+        <svg id="themeIcon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      </button>
+
+      <button class="btn sm" id="quickSaveBtn" data-toast="Workspace saved to local store">
+        <svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        <span>Save</span>
+      </button>
+
+      <button class="btn primary sm" id="topExportBtn">
+        <span>Export (12)</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       MAIN WORKSPACE STAGE
+       ========================================================================== -->
+  <main class="app-stage">
+
+    <!-- ========================================================================
+         VIEW 1: DATA STUDIO
+         ======================================================================== -->
+    <section class="view-container active" id="view-data">
+      <div class="view-inner">
+        <div class="view-header">
+          <div class="view-title-group">
+            <h1>
+              <span>Data Ingestion & Mapping</span>
+              <span class="badge success">Clean & Validated</span>
+            </h1>
+            <p>Upload recipient lists, inspect data types, and map columns to your design tokens.</p>
+          </div>
+
+          <div style="display:flex;gap:10px;">
+            <button class="btn sm" data-toast="Clipboard contents parsed into table">
+              <svg viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
+              <span>Paste from Sheet</span>
+            </button>
+            <button class="btn primary sm" data-toast="Choose new .csv or .xlsx file">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+              <span>Import CSV</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Metrics Cards -->
+        <div class="metrics-strip">
+          <div class="metric-card">
+            <span class="label">Total Recipients</span>
+            <div class="value">12 <small style="font-size:13px;font-weight:600;color:var(--text-tertiary)">students</small></div>
+          </div>
+          <div class="metric-card">
+            <span class="label">Detected Fields</span>
+            <div class="value">5 <small style="font-size:13px;font-weight:600;color:var(--text-tertiary)">columns</small></div>
+          </div>
+          <div class="metric-card">
+            <span class="label">Mapping Integrity</span>
+            <div class="value" style="color:var(--accent-emerald)">100% <small style="font-size:13px;font-weight:600;color:var(--accent-emerald)">4 of 4 mapped</small></div>
+          </div>
+          <div class="metric-card">
+            <span class="label">Validation Status</span>
+            <div class="value" style="color:var(--accent-blue)">0 <small style="font-size:13px;font-weight:600;color:var(--text-tertiary)">errors detected</small></div>
+          </div>
+        </div>
+
+        <div class="data-grid-layout">
+          <!-- Left Column: Source file details & field mapper -->
+          <div style="display:flex;flex-direction:column;gap:18px;">
+            <div class="surface-card source-card">
+              <div class="file-badge-row">
+                <div class="file-icon-box">
+                  <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                </div>
+                <div class="file-details">
+                  <b>data.csv</b>
+                  <span>12 rows · UTF-8 encoded · 3.2 KB</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;">
+                <button class="btn sm" style="flex:1" data-toast="File re-checked against schema">Re-scan</button>
+                <button class="btn sm" style="flex:1" data-toast="Exported clean CSV">Download</button>
+              </div>
+            </div>
+
+            <!-- Field Matcher -->
+            <div class="surface-card" style="padding:20px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+                <span style="font-weight:700;font-size:14px;">Field Token Matcher</span>
+                <span class="badge success" id="mappingTag">All Mapped</span>
+              </div>
+              <p style="font-size:12.5px;color:var(--text-secondary);margin-bottom:16px;">
+                Link variables defined in your template to data columns from your imported spreadsheet.
+              </p>
+              <div class="mapping-list" id="mappingList"></div>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Data Table -->
+          <div class="surface-card table-card">
+            <div class="table-toolbar">
+              <div class="search-wrapper">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <input class="input-field" id="tableSearchInput" placeholder="Filter rows by name or roll..." />
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span style="font-size:12px;color:var(--text-tertiary);" id="tableCountBadge">Showing 12 of 12</span>
+                <button class="btn sm ghost" data-toast="Column display filter">Columns ▾</button>
+              </div>
+            </div>
+            <div class="table-scroll-area">
+              <table class="apple-table">
+                <thead>
+                  <tr id="tableHeadRow"></tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         VIEW 2: DESIGN CANVAS & INSPECTOR
+         ======================================================================== -->
+    <section class="view-container" id="view-design" style="overflow:hidden;">
+      <div class="design-workspace">
+        <!-- Main Canvas Area -->
+        <div class="canvas-area">
+          <div class="canvas-topbar">
+            <!-- Template Tabs -->
+            <div class="template-pills" id="templatePillGroup">
+              <button class="template-pill active" data-doc="standard">
+                <svg viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                <span>Appreciation.cert.html</span>
+              </button>
+              <button class="template-pill" data-doc="gold">
+                <svg viewBox="0 0 24 24" style="width:14px;height:14px;"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+                <span>Best Team.cert.html</span>
+              </button>
+              <button class="template-pill new" data-toast="Create fresh blank certificate">+ New</button>
+            </div>
+
+            <!-- View Modes & Field Value Switch -->
+            <div class="segmented-control" id="viewModeSegment">
+              <button class="active" data-mode="visual">Visual</button>
+              <button data-mode="code">Source Code</button>
+            </div>
+
+            <!-- Record Stepper & Zoom -->
+            <div class="canvas-controls-center">
+              <div class="segmented-control" id="dataModeSegment">
+                <button class="active" data-fields="0">Sample Data</button>
+                <button data-fields="1">Tokens { }</button>
+              </div>
+
+              <div class="record-stepper">
+                <button class="btn sm ghost icon-only" id="prevRecordBtn" title="Previous Recipient">‹</button>
+                <span class="name-badge" id="recordNameLabel">A. M. ISMAIL (1/12)</span>
+                <button class="btn sm ghost icon-only" id="nextRecordBtn" title="Next Recipient">›</button>
+              </div>
+
+              <div class="zoom-controls">
+                <button class="btn sm ghost icon-only" id="zoomOutBtn">−</button>
+                <span class="zoom-value" id="zoomLabel">75%</span>
+                <button class="btn sm ghost icon-only" id="zoomInBtn">+</button>
+                <button class="btn sm ghost" id="zoomFitBtn" style="font-size:11px;padding:0 6px;">Fit</button>
+              </div>
+
+              <!-- Mobile Inspector Toggle -->
+              <button class="btn sm ghost icon-only" id="mobileInspectorBtn" title="Toggle Inspector">
+                <svg viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M15 3v18"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Scalable Canvas Viewport -->
+          <div class="canvas-viewport" id="canvasViewport">
+            <div class="cert-scaler-wrapper" id="certScaler">
+              <!-- Rendered certificate is injected here -->
+              <div id="certRenderContainer"></div>
+            </div>
+            <!-- Code Mode Container -->
+            <div id="codeModeContainer" class="code-view-container" style="display:none;"></div>
+          </div>
+        </div>
+
+        <!-- Right Side Inspector Panel -->
+        <aside class="inspector-sidebar" id="inspectorSidebar">
+          <div class="inspector-header">
+            <div class="segmented-control" id="inspectorTabGroup" style="width:100%;">
+              <button class="active" style="flex:1" data-tab="insert">Insert</button>
+              <button style="flex:1" data-tab="style">Element Style</button>
+            </div>
+          </div>
+
+          <!-- Tab 1: Insert Elements & Assets -->
+          <div class="inspector-content" id="paneInsert">
+            <div>
+              <label class="field-label">Available Data Tokens</label>
+              <div class="token-chip-container" id="insertTokenList"></div>
+            </div>
+
+            <div>
+              <label class="field-label">Workspace Media & Logos</label>
+              <div class="assets-grid">
+                <div class="asset-box" data-toast="Insert Anna University Emblem">
+                  <img src="sample/anna_logo.png" alt="Anna Univ Logo" />
+                </div>
+                <div class="asset-box" data-toast="Insert MIT Campus Crest">
+                  <img src="sample/mit_logo.png" alt="MIT Logo" />
+                </div>
+                <div class="asset-box upload" data-toast="Upload logo to /files/ folder">+</div>
+              </div>
+            </div>
+
+            <div>
+              <label class="field-label">Design Elements</label>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <button class="btn sm" data-toast="Added new text block">
+                  <svg viewBox="0 0 24 24"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" x2="15" y1="20" y2="20"/><line x1="12" x2="12" y1="4" y2="20"/></svg>
+                  <span>Text Block</span>
+                </button>
+                <button class="btn sm" data-toast="Added dynamic QR verification code">
+                  <svg viewBox="0 0 24 24"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg>
+                  <span>QR Code</span>
+                </button>
+                <button class="btn sm" data-toast="Added signature line">
+                  <svg viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></svg>
+                  <span>Signature</span>
+                </button>
+                <button class="btn sm" data-toast="Added gold decorative seal">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+                  <span>Embossed Seal</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="surface-card" style="padding:14px;background:var(--bg-subtle);">
+              <b style="display:block;font-size:12.5px;margin-bottom:4px;">Canva & Figma Workflow</b>
+              <p style="font-size:12px;color:var(--text-secondary);">
+                Export high-res background art from Canva as PNG/PDF, drop it here, and layer variable text right on top.
+              </p>
+            </div>
+          </div>
+
+          <!-- Tab 2: Element Properties & Typography -->
+          <div class="inspector-content" id="paneStyle" style="display:none;">
+            <div>
+              <label class="field-label">Selected Element</label>
+              <div class="badge blue" id="selectedElementNameBadge">Recipient Name Layer</div>
+            </div>
+
+            <div>
+              <label class="field-label">Typography</label>
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <select class="input-field" id="styleFontFamily" style="width:100%;">
+                  <option value="'Great Vibes', cursive">Great Vibes (Script)</option>
+                  <option value="'Cinzel', serif">Cinzel (Roman Classical)</option>
+                  <option value="'EB Garamond', serif">EB Garamond (Editorial)</option>
+                  <option value="'Playfair Display', serif">Playfair Display (Header)</option>
+                  <option value="'Plus Jakarta Sans', sans-serif">Modern Sans</option>
+                </select>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                  <div>
+                    <label class="field-label" style="font-size:10px;">Font Size</label>
+                    <input class="input-field" type="number" id="styleFontSize" value="64" style="width:100%;" />
+                  </div>
+                  <div>
+                    <label class="field-label" style="font-size:10px;">Alignment</label>
+                    <div class="segmented-control" style="width:100%;">
+                      <button style="flex:1">L</button>
+                      <button class="active" style="flex:1">C</button>
+                      <button style="flex:1">R</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="field-label">Smart Text Fitting</label>
+              <select class="input-field" style="width:100%;">
+                <option>Auto-shrink long names (Recommended)</option>
+                <option>Ellipsize overflow</option>
+                <option>Fixed font size</option>
+              </select>
+            </div>
+
+            <div style="display:flex;gap:10px;margin-top:auto;">
+              <button class="btn sm" style="flex:1;" data-toast="Layer duplicated">
+                <svg viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                <span>Duplicate</span>
+              </button>
+              <button class="btn sm" style="flex:1;color:var(--accent-rose);" data-toast="Layer removed">
+                <svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/></svg>
+                <span>Delete</span>
+              </button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         VIEW 3: FLOW ROUTING STUDIO
+         ======================================================================== -->
+    <section class="view-container" id="view-flow">
+      <div class="view-inner">
+        <div class="view-header">
+          <div class="view-title-group">
+            <h1>
+              <span>Conditional Logic & Routing</span>
+              <span class="badge" style="background:var(--accent-purple-subtle);color:var(--accent-purple);">Rules Engine</span>
+            </h1>
+            <p>Automatically distribute distinct certificate templates based on team membership, scores, or achievements.</p>
+          </div>
+          <button class="btn primary sm" data-toast="New condition added to rules list">
+            <svg viewBox="0 0 24 24"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
+            <span>Add Condition Rule</span>
+          </button>
+        </div>
+
+        <!-- Recipient Split Visualization Bar -->
+        <div style="margin-bottom:28px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:13px;font-weight:700;">Template Allocation Breakdown</span>
+            <span style="font-size:12px;color:var(--text-tertiary);">12 of 12 recipients assigned (100%)</span>
+          </div>
+          <div class="flow-distribution-bar" id="flowDistBar"></div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr;gap:20px;">
+          <!-- Primary Rule Card -->
+          <div class="surface-card rule-card">
+            <div class="rule-header">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div class="step-index" style="width:26px;height:26px;border-radius:50%;background:var(--accent-purple);color:#fff;display:grid;place-items:center;font-weight:700;font-size:12px;">1</div>
+                <span style="font-weight:700;font-size:15px;">Honors & Special Awards Rule</span>
+              </div>
+              <span class="badge success" id="ruleCountBadge">4 students qualified</span>
+            </div>
+
+            <div class="rule-builder-row">
+              <span style="color:var(--text-tertiary);">IF COLUMN</span>
+              <select class="input-field" id="ruleColumnSelect" style="height:34px;"></select>
+
+              <select class="input-field" id="ruleOperatorSelect" style="height:34px;">
+                <option value="is">IS EQUAL TO</option>
+                <option value="is not">IS NOT</option>
+                <option value="contains">CONTAINS</option>
+                <option value="starts with">STARTS WITH</option>
+              </select>
+
+              <input class="input-field" id="ruleValueInput" value="Team 1" style="height:34px;width:160px;" />
+
+              <span style="color:var(--text-tertiary);">THEN ASSIGN TEMPLATE</span>
+              <select class="input-field" id="ruleDesignSelect" style="height:34px;">
+                <option value="Best team">Best team (Excellence Gold)</option>
+                <option value="Appreciation">Appreciation (Standard)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Fallback Default Rule Card -->
+          <div class="surface-card rule-card" style="background:var(--bg-subtle);">
+            <div class="rule-header">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div class="step-index" style="width:26px;height:26px;border-radius:50%;background:var(--text-tertiary);color:#fff;display:grid;place-items:center;font-weight:700;font-size:12px;">★</div>
+                <span style="font-weight:700;font-size:15px;">Default Fallback Template</span>
+              </div>
+              <span class="badge">Everyone else (8 students)</span>
+            </div>
+
+            <div class="rule-builder-row">
+              <span style="color:var(--text-tertiary);">FOR ALL UNMATCHED PARTICIPANTS USE:</span>
+              <select class="input-field" id="ruleFallbackSelect" style="height:34px;">
+                <option value="Appreciation">Appreciation (Standard)</option>
+                <option value="Best team">Best team (Excellence Gold)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Raw flow.json Configuration (Collapsible) -->
+          <div class="surface-card" style="padding:16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span class="mono" style="font-size:13px;font-weight:600;">flow.json Specification</span>
+              <button class="btn sm ghost" data-toast="JSON configuration copied to clipboard">Copy Config</button>
+            </div>
+            <pre class="code-view-container" id="flowJsonPreview" style="margin-top:12px;max-height:220px;"></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         VIEW 4: EXPORT CENTER
+         ======================================================================== -->
+    <section class="view-container" id="view-export">
+      <div class="view-inner" style="max-width:1400px;">
+        <div class="view-header">
+          <div class="view-title-group">
+            <h1>
+              <span>Batch Generation & Export</span>
+              <span class="badge success">Ready to Render</span>
+            </h1>
+            <p>Produce high-resolution vector PDFs or high-density PNG images packaged for distribution.</p>
+          </div>
+        </div>
+
+        <div class="export-layout">
+          <!-- Left Configuration Column -->
+          <div>
+            <!-- Pre-flight verification checks -->
+            <div class="surface-card" style="padding:18px;margin-bottom:20px;">
+              <span style="font-weight:700;font-size:14px;display:block;margin-bottom:12px;">Pre-flight Quality Checklist</span>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="display:flex;align-items:center;gap:8px;font-size:13px;">
+                  <span class="badge success">✓ PASS</span>
+                  <span>All 4 template data tokens matched with CSV</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;font-size:13px;">
+                  <span class="badge success">✓ PASS</span>
+                  <span>Zero empty values or null rows detected</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;font-size:13px;">
+                  <span class="badge warning">AUTO</span>
+                  <span>2 long names automatically shrunk for optical fit</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Export Format Selector -->
+            <div id="exportFormatGroup">
+              <label class="export-option-card selected">
+                <input type="radio" name="exportFormat" checked />
+                <div>
+                  <b style="display:block;font-size:14px;color:var(--text-primary);">Single Master PDF Document</b>
+                  <span style="font-size:12.5px;color:var(--text-secondary);">All 12 certificates compiled into one 300 DPI print-ready document.</span>
+                </div>
+              </label>
+
+              <label class="export-option-card">
+                <input type="radio" name="exportFormat" />
+                <div>
+                  <b style="display:block;font-size:14px;color:var(--text-primary);">Individual PDFs Archive (ZIP)</b>
+                  <span style="font-size:12.5px;color:var(--text-secondary);">Separate vector PDF per student, neatly packaged into a ZIP archive.</span>
+                </div>
+              </label>
+
+              <label class="export-option-card">
+                <input type="radio" name="exportFormat" />
+                <div>
+                  <b style="display:block;font-size:14px;color:var(--text-primary);">High-Density PNG Web Images (ZIP)</b>
+                  <span style="font-size:12.5px;color:var(--text-secondary);">2x Retina crisp PNG images, optimized for social sharing and email.</span>
+                </div>
+              </label>
+            </div>
+
+            <!-- Filename Pattern Customizer -->
+            <div style="margin-top:16px;">
+              <label class="field-label">File Naming Formula</label>
+              <input class="input-field mono" id="fileNamePatternInput" value="{Name} - {Roll Number}" style="width:100%;font-size:13px;" />
+              <div style="display:flex;gap:6px;margin-top:8px;">
+                <span class="token-chip" style="font-size:11px;" data-insert="{Name}">+ {Name}</span>
+                <span class="token-chip" style="font-size:11px;" data-insert="{Roll Number}">+ {Roll Number}</span>
+                <span class="token-chip" style="font-size:11px;" data-insert="{Team}">+ {Team}</span>
+              </div>
+            </div>
+
+            <!-- Progress Simulation Container -->
+            <div class="export-progress-box" id="exportProgressBox">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <b style="font-size:13.5px;" id="progressStatusLabel">Rendering Certificate 1 of 12...</b>
+                <span class="mono" id="progressPercentLabel" style="font-size:12.5px;color:var(--text-tertiary);">0%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" id="progressBar"></div>
+              </div>
+              <div style="display:flex;justify-content:flex-end;">
+                <button class="btn sm ghost" id="cancelExportBtn">Cancel</button>
+              </div>
+            </div>
+
+            <button class="btn primary lg" id="startExportBtn" style="width:100%;margin-top:24px;border-radius:var(--radius-xl);">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+              <span>Download 12 Certificates</span>
+            </button>
+          </div>
+
+          <!-- Right Thumbnail Wall -->
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+              <span style="font-weight:700;font-size:14px;">Batch Preview Wall</span>
+              <span style="font-size:12px;color:var(--text-tertiary);">Click any certificate to inspect full resolution</span>
+            </div>
+            <div class="gallery-grid" id="exportGalleryGrid"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       WORKSPACE SWITCHER MODAL
+       ========================================================================== -->
+  <div class="modal-overlay" id="wsModal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <span style="font-weight:700;font-size:15px;">Project Workspace Settings</span>
+        <button class="btn ghost icon-only sm" id="closeWsModalBtn">✕</button>
+      </div>
+      <div class="modal-body">
+        <label class="field-label">Active Project Folder Name</label>
+        <input class="input-field mono" id="wsNameInput" value="metrology-lab" style="width:100%;margin-bottom:16px;" />
+
+        <label class="field-label">Directory Contents & Structure</label>
+        <div style="background:var(--bg-subtle);border:1px solid var(--border-subtle);border-radius:var(--radius-md);padding:10px;" id="folderTreeBox"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn sm" data-toast="Bundled as metrology-lab.zip">Export .zip</button>
+        <button class="btn primary sm" id="applyWsNameBtn">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Apple-Style Dynamic Toast Notification -->
+  <div class="toast-notification" id="appToast">
+    <svg viewBox="0 0 24 24" style="color:var(--accent-blue);"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+    <span id="toastMessage">Action completed successfully</span>
+  </div>
+
+  <!-- ==========================================================================
+       APPLICATION LOGIC & INTERACTIVE ENGINE
+       ========================================================================== -->
+  <script>
+    /* --- Helper utilities --- */
+    const $ = (sel, parent = document) => parent.querySelector(sel);
+    const $$ = (sel, parent = document) => [...parent.querySelectorAll(sel)];
+
+    /* --- Workspace State --- */
+    const COLS = ['Name', 'Roll Number', 'Team', 'Title', 'Year'];
+    const ROWS = [
+      ['A. M. ISMAIL',      '2023507030', 'Team 1', 'Profile Projector', '3rd year'],
+      ['V. B. JAYARAM',     '2023507040', 'Team 1', 'Profile Projector', '3rd year'],
+      ['M. RAM BARATH',     '2023507039', 'Team 1', 'Profile Projector', '3rd year'],
+      ['R. MONISH KUMAR',   '2023507038', 'Team 1', 'Profile Projector', '3rd year'],
+      ['Mothinath G',       '2023507009', 'Team 2', 'Micrometer',        '3rd year'],
+      ['Madusudarsanan J',  '2023507021', 'Team 2', 'Micrometer',        '3rd year'],
+      ['Prabakaran K',      '2023507302', 'Team 2', 'Micrometer',        '3rd year'],
+      ['Venugopal R',       '2023507307', 'Team 2', 'Micrometer',        '3rd year'],
+      ['Nivedhitha V',      '2023507015', 'Team 3', 'Profilometer',      '3rd year'],
+      ['Litikaa R',         '2023507012', 'Team 3', 'Profilometer',      '3rd year'],
+      ['Abiseik P',         '2023507013', 'Team 3', 'Profilometer',      '3rd year'],
+      ['Sanjay Kumar S',    '2023507018', 'Team 3', 'Profilometer',      '3rd year'],
+    ].map(row => Object.fromEntries(COLS.map((c, i) => [c, row[i]])));
+
+    const appState = {
+      step: 'data',
+      doc: 'standard',
+      viewMode: 'visual',
+      showTokens: false,
+      recordIndex: 0,
+      selectedLayerId: null,
+      zoom: 0.75,
+      theme: 'light',
+      rule: {
+        col: 'Team',
+        op: 'is',
+        val: 'Team 1',
+        design: 'Best team',
+        fallback: 'Appreciation'
+      }
+    };
+
+    /* --- Toast Notification Controller --- */
+    let toastTimeout;
+    function showToast(msg) {
+      const toastEl = $('#appToast');
+      $('#toastMessage').textContent = msg;
+      toastEl.classList.add('active');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toastEl.classList.remove('active');
+      }, 2400);
+    }
+
+    document.addEventListener('click', (e) => {
+      const toastTarget = e.target.closest('[data-toast]');
+      if (toastTarget) {
+        showToast(toastTarget.dataset.toast);
+      }
+    });
+
+    /* --- Theme Management --- */
+    function toggleTheme() {
+      const nextTheme = appState.theme === 'light' ? 'dark' : 'light';
+      appState.theme = nextTheme;
+      document.documentElement.setAttribute('data-theme', nextTheme);
+      $('#themeIcon').innerHTML = nextTheme === 'dark' 
+        ? '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>'
+        : '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>';
+      showToast(`Switched to ${nextTheme} appearance`);
+    }
+    $('#themeToggle').addEventListener('click', toggleTheme);
+
+    /* --- Step Navigation Controller --- */
+    function navigateToStep(step) {
+      appState.step = step;
+      document.body.setAttribute('data-active-step', step);
+
+      $$('.step-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.step === step);
+      });
+
+      $$('.view-container').forEach(view => {
+        view.classList.toggle('active', view.id === `view-${step}`);
+      });
+
+      if (step === 'design') {
+        renderDesign();
+        applyZoom();
+      } else if (step === 'flow') {
+        renderFlow();
+      } else if (step === 'export') {
+        renderExport();
+      }
+    }
+
+    $('#stepNavBar').addEventListener('click', (e) => {
+      const stepBtn = e.target.closest('.step-tab');
+      if (stepBtn) navigateToStep(stepBtn.dataset.step);
+    });
+
+    $('#topExportBtn').addEventListener('click', () => navigateToStep('export'));
+
+    /* --- Matching Helper --- */
+    function rowMatchesRule(row, rule = appState.rule) {
+      const val = String(row[rule.col] ?? '').toLowerCase().trim();
+      const target = String(rule.val).toLowerCase().trim();
+      if (rule.op === 'is') return val === target;
+      if (rule.op === 'is not') return val !== target;
+      if (rule.op === 'contains') return val.includes(target);
+      if (rule.op === 'starts with') return val.startsWith(target);
+      return false;
+    }
+
+    const getAssignedTemplate = (row) => rowMatchesRule(row) ? appState.rule.design : appState.rule.fallback;
+
+    /* ==========================================================================
+       VIEW 1: DATA LOGIC
+       ========================================================================== */
+    function renderDataView() {
+      // Table Header
+      $('#tableHeadRow').innerHTML = '<th>#</th>' + COLS.map(c => `<th>${c}</th>`).join('');
+
+      // Filtered rows
+      const query = ($('#tableSearchInput').value || '').toLowerCase();
+      const filtered = ROWS.filter(r => !query || Object.values(r).join(' ').toLowerCase().includes(query));
+
+      $('#tableCountBadge').textContent = `Showing ${filtered.length} of ${ROWS.length}`;
+
+      $('#tableBody').innerHTML = filtered.map((r, idx) => `
+        <tr>
+          <td class="mono" style="color:var(--text-tertiary);">${idx + 1}</td>
+          <td style="font-weight:700;">${r.Name}</td>
+          <td class="mono">${r['Roll Number']}</td>
+          <td><span class="badge blue">${r.Team}</span></td>
+          <td>${r.Title}</td>
+          <td style="color:var(--text-secondary);">${r.Year}</td>
+        </tr>
+      `).join('');
+
+      // Mapping Rows
+      const fieldMappings = [
+        ['Name', 'Name', true],
+        ['Roll_Number', 'Roll Number', false],
+        ['Team_ID', 'Team', true],
+        ['Title', 'Title', true]
+      ];
+
+      $('#mappingList').innerHTML = fieldMappings.map(([variable, assignedCol, isConfirmed]) => `
+        <div class="mapping-row">
+          <span class="mapping-var">{${variable}}</span>
+          <span style="font-size:12px;color:var(--text-tertiary);">→</span>
+          <select class="mapping-select">
+            ${COLS.map(col => `<option ${col === assignedCol ? 'selected' : ''}>${col}</option>`).join('')}
+          </select>
+          ${isConfirmed 
+            ? '<span class="badge success" style="font-size:11px;">100% Match</span>' 
+            : '<button class="btn sm" data-confirm-mapping="1" style="font-size:11px;height:26px;">Confirm</button>'}
+        </div>
+      `).join('');
+    }
+
+    $('#tableSearchInput').addEventListener('input', renderDataView);
+
+    $('#mappingList').addEventListener('click', (e) => {
+      const confirmBtn = e.target.closest('[data-confirm-mapping]');
+      if (!confirmBtn) return;
+      confirmBtn.outerHTML = '<span class="badge success" style="font-size:11px;">100% Match</span>';
+      $('#mappingTag').textContent = 'All Mapped';
+      $('#mappingTag').className = 'badge success';
+      showToast('Field mapping confirmed');
+    });
+
+    /* ==========================================================================
+       VIEW 2: DESIGN CANVAS LOGIC
+       ========================================================================== */
+    function generateCertHTML(row, variant, { showTokens = false, selectedId = null } = {}) {
+      const val = (k) => showTokens ? `<span class="field-token">{${k}}</span>` : (row[k] || '');
+      const nameFontSize = !showTokens && row.Name.length > 15 ? 54 : 64;
+
+      const layer = (id, tag, style, content) => `
+        <div class="cert-layer ${selectedId === id ? 'selected' : ''}" 
+             data-id="${id}" 
+             data-tag="${tag}" 
+             style="${style}">
+          ${content}
+        </div>
+      `;
+
+      return `
+        <div class="cert-paper ${variant === 'gold' ? 'gold' : ''}">
+          <div class="cert-frame-outer"></div>
+          <div class="cert-frame-inner"></div>
+
+          ${layer('logoL', 'Emblem: Anna Univ', 'left:72px;top:54px', '<img src="sample/anna_logo.png" width="86" height="86" alt="Logo" style="object-fit:contain;" />')}
+          ${layer('logoR', 'Emblem: MIT Campus', 'right:72px;top:54px', '<img src="sample/mit_logo.png" width="86" height="86" alt="Logo" style="object-fit:contain;" />')}
+
+          ${layer('header', 'Institution Header', 'left:218px;top:54px;width:620px', `
+            <div class="cert-univ">ANNA UNIVERSITY</div>
+            <div class="cert-inst">MADRAS INSTITUTE OF TECHNOLOGY</div>
+            <div class="cert-dept">Department of Production Technology</div>
+          `)}
+
+          ${layer('title', 'Award Title', 'left:0;right:0;top:188px', `
+            <div class="cert-title">${variant === 'gold' ? 'Certificate of Excellence' : 'Certificate of Appreciation'}</div>
+          `)}
+
+          ${layer('preamble', 'Presenter Subtitle', 'left:0;right:0;top:244px', `
+            <div class="cert-pre">This certificate is proudly presented to</div>
+          `)}
+
+          ${layer('name', '{Name} (Auto-Shrink)', 'left:148px;right:148px;top:270px', `
+            <div class="cert-name" style="font-size:${nameFontSize}px">${val('Name')}</div>
+          `)}
+
+          ${layer('body', 'Award Citation', 'left:150px;right:150px;top:384px', `
+            <div class="cert-body">
+              in recognition of valuable contribution as an active member of <b>${val('Team')}</b> (Roll No. <b>${val('Roll Number')}</b>) towards the successful virtualization of the Measurements &amp; Metrology Laboratory experiment.
+            </div>
+          `)}
+
+          ${layer('topic', '{Title}', 'left:0;right:0;top:478px', `
+            <div class="cert-subhead">VIRTUALIZED LABORATORY EXPERIMENT</div>
+            <div class="cert-topic">${val('Title')}</div>
+          `)}
+
+          ${layer('sigL', 'Coordinator Signature', 'left:112px;bottom:64px;width:240px', `
+            <div class="cert-sigline"></div>
+            <div class="cert-sigt">Lab Coordinator</div>
+            <div class="cert-sigs">Virtual Laboratory Project</div>
+          `)}
+
+          ${layer('sigR', 'HOD Signature', 'right:112px;bottom:64px;width:240px', `
+            <div class="cert-sigline"></div>
+            <div class="cert-sigt">Head of Department</div>
+            <div class="cert-sigs">Dept. of Production Technology</div>
+          `)}
+
+          ${variant === 'gold' ? layer('seal', 'Gold Honors Seal', 'left:476px;bottom:58px', `
+            <div class="cert-seal">
+              <span style="font-size:20px;">★</span>
+              BEST<br>TEAM
+            </div>
+          `) : ''}
+        </div>
+      `;
+    }
+
+    function renderDesign() {
+      // Template Tab indicator
+      $$('#templatePillGroup .template-pill[data-doc]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.doc === appState.doc);
+      });
+
+      const currentRecord = ROWS[appState.recordIndex];
+      $('#recordNameLabel').textContent = `${currentRecord.Name} (${appState.recordIndex + 1}/${ROWS.length})`;
+
+      const renderBox = $('#certRenderContainer');
+      const codeBox = $('#codeModeContainer');
+
+      if (appState.viewMode === 'code') {
+        renderBox.style.display = 'none';
+        codeBox.style.display = 'block';
+        codeBox.innerHTML = `
+&lt;!-- CertFlow Standard HTML Certificate Document --&gt;
+&lt;div class="cert-paper" data-page-format="1056x747"&gt;
+  &lt;div class="cert-frame-outer"&gt;&lt;/div&gt;
+  &lt;div class="cert-frame-inner"&gt;&lt;/div&gt;
+
+  &lt;img src="files/anna_logo.png" style="left:72px;top:54px;width:86px;" /&gt;
+  &lt;img src="files/mit_logo.png" style="right:72px;top:54px;width:86px;" /&gt;
+
+  &lt;h1 class="cert-title" style="top:188px;"&gt;
+    ${appState.doc === 'gold' ? 'Certificate of Excellence' : 'Certificate of Appreciation'}
+  &lt;/h1&gt;
+
+  &lt;div class="cert-name" style="top:270px;" data-fit="auto-shrink"&gt;
+    <span style="color:#60a5fa;">{Name}</span>
+  &lt;/div&gt;
+
+  &lt;p class="cert-body" style="top:384px;"&gt;
+    In recognition of contribution as a member of <span style="color:#60a5fa;">{Team}</span> 
+    (Roll No. <span style="color:#60a5fa;">{Roll Number}</span>)...
+  &lt;/p&gt;
+
+  &lt;div class="cert-topic" style="top:478px;"&gt;
+    <span style="color:#60a5fa;">{Title}</span>
+  &lt;/div&gt;
+&lt;/div&gt;
+`;
+        return;
+      }
+
+      renderBox.style.display = 'block';
+      codeBox.style.display = 'none';
+      renderBox.innerHTML = generateCertHTML(currentRecord, appState.doc, {
+        showTokens: appState.showTokens,
+        selectedId: appState.selectedLayerId
+      });
+    }
+
+    function applyZoom() {
+      const scaler = $('#certScaler');
+      scaler.style.transform = `scale(${appState.zoom})`;
+      $('#zoomLabel').textContent = `${Math.round(appState.zoom * 100)}%`;
+    }
+
+    /* Template Switcher */
+    $('#templatePillGroup').addEventListener('click', (e) => {
+      const pill = e.target.closest('.template-pill[data-doc]');
+      if (pill) {
+        appState.doc = pill.dataset.doc;
+        appState.selectedLayerId = null;
+        renderDesign();
+      }
+    });
+
+    /* Visual vs Code Mode */
+    $('#viewModeSegment').addEventListener('click', (e) => {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+      appState.viewMode = btn.dataset.mode;
+      $$('#viewModeSegment button').forEach(b => b.classList.toggle('active', b === btn));
+      renderDesign();
+    });
+
+    /* Sample vs Tokens */
+    $('#dataModeSegment').addEventListener('click', (e) => {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+      appState.showTokens = btn.dataset.fields === '1';
+      $$('#dataModeSegment button').forEach(b => b.classList.toggle('active', b === btn));
+      renderDesign();
+    });
+
+    /* Steppers */
+    $('#prevRecordBtn').addEventListener('click', () => {
+      appState.recordIndex = (appState.recordIndex + ROWS.length - 1) % ROWS.length;
+      renderDesign();
+    });
+    $('#nextRecordBtn').addEventListener('click', () => {
+      appState.recordIndex = (appState.recordIndex + 1) % ROWS.length;
+      renderDesign();
+    });
+
+    /* Zoom Handlers */
+    $('#zoomInBtn').addEventListener('click', () => {
+      appState.zoom = Math.min(1.25, appState.zoom + 0.1);
+      applyZoom();
+    });
+    $('#zoomOutBtn').addEventListener('click', () => {
+      appState.zoom = Math.max(0.4, appState.zoom - 0.1);
+      applyZoom();
+    });
+    $('#zoomFitBtn').addEventListener('click', () => {
+      const viewportWidth = $('#canvasViewport').clientWidth - 60;
+      appState.zoom = Math.min(1, Math.max(0.4, viewportWidth / 1056));
+      applyZoom();
+    });
+
+    /* Canvas Element Selection & Inspector Linking */
+    $('#certRenderContainer').addEventListener('click', (e) => {
+      const layer = e.target.closest('.cert-layer');
+      if (layer) {
+        appState.selectedLayerId = layer.dataset.id;
+        $('#selectedElementNameBadge').textContent = layer.dataset.tag || layer.dataset.id;
+        switchInspectorTab('style');
+      } else {
+        appState.selectedLayerId = null;
+        switchInspectorTab('insert');
+      }
+      renderDesign();
+    });
+
+    function switchInspectorTab(tabName) {
+      $$('#inspectorTabGroup button').forEach(b => b.classList.toggle('active', b.dataset.tab === tabName));
+      $('#paneInsert').style.display = tabName === 'insert' ? 'flex' : 'none';
+      $('#paneStyle').style.display = tabName === 'style' ? 'flex' : 'none';
+    }
+
+    $('#inspectorTabGroup').addEventListener('click', (e) => {
+      const b = e.target.closest('button');
+      if (b) switchInspectorTab(b.dataset.tab);
+    });
+
+    // Populate insert tokens
+    $('#insertTokenList').innerHTML = COLS.map(c => `
+      <span class="token-chip" data-toast="Inserted variable {${c}} into design">{${c}}</span>
+    `).join('');
+
+    // Mobile Inspector Drawer toggle
+    $('#mobileInspectorBtn').addEventListener('click', () => {
+      $('#inspectorSidebar').classList.toggle('open-mobile');
+    });
+
+    /* ==========================================================================
+       VIEW 3: FLOW ROUTING LOGIC
+       ========================================================================== */
+    function renderFlow() {
+      const rule = appState.rule;
+      const matched = ROWS.filter(r => rowMatchesRule(r));
+      const matchCount = matched.length;
+      const fallbackCount = ROWS.length - matchCount;
+
+      $('#ruleCountBadge').textContent = `${matchCount} students qualified`;
+
+      // Split distribution preview
+      const excellencePct = Math.round((matchCount / ROWS.length) * 100);
+      const standardPct = 100 - excellencePct;
+
+      $('#flowDistBar').innerHTML = `
+        <div class="flow-dist-segment" style="width:${excellencePct}%;background:linear-gradient(90deg, #8b5cf6, #7c3aed);">
+          Best Team (${matchCount} · ${excellencePct}%)
+        </div>
+        <div class="flow-dist-segment" style="width:${standardPct}%;background:linear-gradient(90deg, #0071e3, #2563eb);">
+          Appreciation (${fallbackCount} · ${standardPct}%)
+        </div>
+      `;
+
+      // Render flow.json
+      $('#flowJsonPreview').innerHTML = JSON.stringify({
+        workspace: $('#wsLabel').textContent,
+        engineVersion: "2.4.0",
+        rules: [
+          {
+            description: "Honors distinction for Team 1",
+            condition: {
+              field: rule.col,
+              operator: rule.op,
+              value: rule.val
+            },
+            assignedTemplate: `${rule.design}.cert.html`,
+            matchedCount: matchCount
+          }
+        ],
+        fallbackTemplate: `${rule.fallback}.cert.html`,
+        exportPattern: "{Name} - {Roll Number}"
+      }, null, 2);
+    }
+
+    // Populate rule columns
+    $('#ruleColumnSelect').innerHTML = COLS.map(c => `<option ${c === 'Team' ? 'selected' : ''}>${c}</option>`).join('');
+
+    $('#ruleColumnSelect').addEventListener('change', (e) => { appState.rule.col = e.target.value; renderFlow(); });
+    $('#ruleOperatorSelect').addEventListener('change', (e) => { appState.rule.op = e.target.value; renderFlow(); });
+    $('#ruleValueInput').addEventListener('input', (e) => { appState.rule.val = e.target.value; renderFlow(); });
+    $('#ruleDesignSelect').addEventListener('change', (e) => { appState.rule.design = e.target.value; renderFlow(); });
+    $('#ruleFallbackSelect').addEventListener('change', (e) => { appState.rule.fallback = e.target.value; renderFlow(); });
+
+    /* ==========================================================================
+       VIEW 4: EXPORT CENTER LOGIC
+       ========================================================================== */
+    function renderExport() {
+      const container = $('#exportGalleryGrid');
+      container.innerHTML = ROWS.map((r, i) => {
+        const assigned = getAssignedTemplate(r);
+        const variant = assigned === 'Best team' ? 'gold' : 'standard';
+        return `
+          <div class="thumb-card" data-toast="Inspecting Certificate #${i + 1}">
+            <div class="thumb-preview-frame">
+              <div style="transform:scale(0.208);transform-origin:top left;width:1056px;pointer-events:none;">
+                ${generateCertHTML(r, variant)}
+              </div>
+            </div>
+            <div class="thumb-caption">
+              <div>
+                <b>${r.Name}</b>
+                <div style="font-size:11px;color:var(--text-tertiary);">${r['Roll Number']}</div>
+              </div>
+              <span class="badge ${variant === 'gold' ? 'warning' : 'blue'}" style="font-size:10px;">${assigned}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Export options card selector
+    $('#exportFormatGroup').addEventListener('click', (e) => {
+      const card = e.target.closest('.export-option-card');
+      if (!card) return;
+      $$('#exportFormatGroup .export-option-card').forEach(c => {
+        const isTarget = c === card;
+        c.classList.toggle('selected', isTarget);
+        c.querySelector('input[type="radio"]').checked = isTarget;
+      });
+    });
+
+    // Filename token helper
+    document.querySelectorAll('[data-insert]').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const input = $('#fileNamePatternInput');
+        input.value += ` - ${chip.dataset.insert}`;
+        showToast(`Appended ${chip.dataset.insert}`);
+      });
+    });
+
+    // Export Progress Simulation
+    let exportTimer;
+    $('#startExportBtn').addEventListener('click', () => {
+      let current = 0;
+      const total = ROWS.length;
+      $('#exportProgressBox').style.display = 'block';
+      $('#startExportBtn').style.display = 'none';
+
+      exportTimer = setInterval(() => {
+        current++;
+        const pct = Math.round((current / total) * 100);
+        $('#progressBar').style.width = `${pct}%`;
+        $('#progressPercentLabel').textContent = `${pct}%`;
+        $('#progressStatusLabel').textContent = `Rendering Certificate ${current} of ${total} (${ROWS[current - 1].Name})...`;
+
+        if (current >= total) {
+          clearInterval(exportTimer);
+          setTimeout(() => {
+            $('#exportProgressBox').style.display = 'none';
+            $('#startExportBtn').style.display = 'flex';
+            showToast('Batch complete: 12 certificates compiled and downloaded');
+          }, 400);
+        }
+      }, 220);
+    });
+
+    $('#cancelExportBtn').addEventListener('click', () => {
+      clearInterval(exportTimer);
+      $('#exportProgressBox').style.display = 'none';
+      $('#startExportBtn').style.display = 'flex';
+      showToast('Export cancelled');
+    });
+
+    /* ==========================================================================
+       WORKSPACE MODAL LOGIC
+       ========================================================================== */
+    function renderFolderTree() {
+      const wsName = $('#wsNameInput').value.trim() || 'metrology-lab';
+      $('#folderTreeBox').innerHTML = `
+        <div class="tree-node">📁 <b>${wsName}/</b></div>
+        <div class="tree-node depth-1">📊 data.csv <span style="margin-left:auto;font-size:11px;color:var(--text-tertiary);">Step 1</span></div>
+        <div class="tree-node depth-1">📄 Appreciation.cert.html <span style="margin-left:auto;font-size:11px;color:var(--text-tertiary);">Step 2</span></div>
+        <div class="tree-node depth-1">📄 Best team.cert.html <span style="margin-left:auto;font-size:11px;color:var(--text-tertiary);">Step 2</span></div>
+        <div class="tree-node depth-1">📁 files/</div>
+        <div class="tree-node depth-2">🖼 anna_logo.png</div>
+        <div class="tree-node depth-2">🖼 mit_logo.png</div>
+        <div class="tree-node depth-1">⚡ flow.json <span style="margin-left:auto;font-size:11px;color:var(--text-tertiary);">Step 3</span></div>
+      `;
+    }
+
+    function toggleWsModal(isOpen) {
+      $('#wsModal').classList.toggle('open', isOpen);
+      if (isOpen) renderFolderTree();
+    }
+
+    $('#wsButton').addEventListener('click', () => toggleWsModal(true));
+    $('#closeWsModalBtn').addEventListener('click', () => toggleWsModal(false));
+    $('#applyWsNameBtn').addEventListener('click', () => {
+      const newName = $('#wsNameInput').value.trim() || 'metrology-lab';
+      $('#wsLabel').textContent = newName;
+      toggleWsModal(false);
+      showToast(`Workspace renamed to ${newName}`);
+    });
+
+    $('#wsNameInput').addEventListener('input', renderFolderTree);
+
+    // Keyboard Shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        toggleWsModal(false);
+        if (appState.selectedLayerId) {
+          appState.selectedLayerId = null;
+          renderDesign();
+        }
+      } else if (e.key === 'ArrowRight' && appState.step === 'design') {
+        $('#nextRecordBtn').click();
+      } else if (e.key === 'ArrowLeft' && appState.step === 'design') {
+        $('#prevRecordBtn').click();
+      }
+    });
+
+    // Initialize application
+    window.addEventListener('resize', () => {
+      if (appState.step === 'design') {
+        const viewportWidth = $('#canvasViewport').clientWidth - 60;
+        appState.zoom = Math.min(1, Math.max(0.4, viewportWidth / 1056));
+        applyZoom();
+      }
+    });
+
+    renderDataView();
+    navigateToStep('data');
+  </script>
+</body>
+</html>
